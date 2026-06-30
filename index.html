@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道看球行程 8/18–8/22</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1f2e; min-height: 100vh; }
+
+  .header { background: linear-gradient(135deg, #1a1f2e 0%, #2d3652 100%); color: white; padding: 24px 32px; }
+  .header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+  .header h1 { font-size: 20px; font-weight: 700; color: #fff; }
+  .badge { background: #e63946; color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+  .header-sub { color: #a0aec0; font-size: 13px; }
+
+  .tabs { display: flex; gap: 0; background: #fff; border-bottom: 2px solid #e2e8f0; padding: 0 24px; overflow-x: auto; }
+  .tab { padding: 12px 20px; font-size: 13px; font-weight: 500; color: #718096; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; white-space: nowrap; }
+  .tab.active { color: #3b82f6; border-bottom-color: #3b82f6; font-weight: 600; }
+  .tab:hover:not(.active) { color: #4a5568; background: #f7fafc; }
+
+  .content { padding: 24px 28px; max-width: 860px; }
+
+  @media (max-width: 600px) {
+    .header { padding: 16px; }
+    .header h1 { font-size: 17px; }
+    .header-sub { font-size: 12px; }
+    .tabs { padding: 0 8px; }
+    .tab { padding: 10px 14px; font-size: 12px; }
+    .content { padding: 16px; }
+    .flight-cards { grid-template-columns: 1fr; }
+    .budget-grid { grid-template-columns: 1fr 1fr; }
+    .price-banner { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .price-banner .amount { font-size: 18px; }
+    .game-banner { flex-wrap: wrap; }
+    .game-badge { margin-top: 8px; }
+    .budget-total { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .budget-total .t-amount { font-size: 18px; }
+    .day-header { gap: 8px; }
+    .day-num { font-size: 10px; }
+    .day-title { font-size: 13px; }
+    .time-col { min-width: 42px; font-size: 11px; }
+    .timeline-text { font-size: 12px; }
+    .transport-table { font-size: 11px; }
+    .transport-table th, .transport-table td { padding: 8px 8px; }
+    .note-card { padding: 12px 14px; }
+    .note-title { font-size: 12px; }
+    .note-body { font-size: 11px; }
+  }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .section-title { font-size: 11px; font-weight: 700; color: #718096; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; margin-top: 24px; }
+  .section-title:first-child { margin-top: 0; }
+
+  /* OVERVIEW */
+  .flight-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .flight-card { background: #fff; border: 2px solid #3b82f6; border-radius: 12px; padding: 18px; }
+  .flight-label { font-size: 10px; font-weight: 700; color: #718096; letter-spacing: 1px; margin-bottom: 10px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+  .selected-tag { font-size: 10px; background: #dbeafe; color: #2563eb; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+  .flight-route { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .flight-time { font-size: 20px; font-weight: 700; color: #1a1f2e; }
+  .flight-arrow { color: #3b82f6; font-size: 16px; }
+  .flight-info { font-size: 12px; color: #718096; line-height: 1.8; }
+  .luggage-note { font-size: 11px; color: #e63946; margin-top: 6px; font-weight: 500; }
+
+  .price-banner { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .price-banner .label { color: #4a5568; font-size: 13px; }
+  .price-banner .amount { font-size: 22px; font-weight: 700; color: #2563eb; }
+  .price-banner .sub { font-size: 12px; color: #718096; }
+
+  .game-banner { background: #fff5f5; border: 1px solid #fed7d7; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; }
+  .game-banner .info .title { font-size: 14px; font-weight: 700; color: #1a1f2e; margin-bottom: 4px; }
+  .game-banner .info .details { font-size: 12px; color: #718096; line-height: 1.7; }
+  .game-badge { background: #e63946; color: white; font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 6px; white-space: nowrap; }
+
+  .budget-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 10px; }
+  .budget-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; }
+  .budget-card .icon { font-size: 18px; margin-bottom: 6px; }
+  .budget-card .label { font-size: 11px; color: #718096; margin-bottom: 3px; }
+  .budget-card .amount { font-size: 14px; font-weight: 700; color: #1a1f2e; }
+  .budget-card .per-person { font-size: 11px; color: #3b82f6; margin-top: 2px; }
+  .budget-total { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 18px 20px; margin-top: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .budget-total .label { color: #4a5568; font-size: 13px; }
+  .budget-total .t-amount { font-size: 22px; font-weight: 700; color: #2563eb; }
+  .budget-total .sub { font-size: 12px; color: #718096; }
+
+  /* ITINERARY */
+  .day-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 14px; }
+  .day-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .day-num { background: #e63946; color: white; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; white-space: nowrap; }
+  .day-title { font-size: 14px; font-weight: 600; color: #1a1f2e; flex: 1; }
+  .day-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+  .tag.game { background: #fff5f5; color: #e63946; }
+  .tag.drive { background: #fffbeb; color: #d97706; }
+  .tag.transit { background: #eff6ff; color: #2563eb; }
+  .tag.free { background: #f0fdf4; color: #16a34a; }
+
+  .timeline-item { display: flex; gap: 12px; margin-bottom: 11px; align-items: flex-start; }
+  .time-col { min-width: 50px; font-size: 11px; color: #3b82f6; font-weight: 600; padding-top: 3px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: #cbd5e0; border: 2px solid #a0aec0; margin-top: 5px; flex-shrink: 0; }
+  .dot.game { border-color: #e63946; background: #fed7d7; }
+  .timeline-text { font-size: 13px; color: #4a5568; line-height: 1.6; flex: 1; }
+  .timeline-text .hl { color: #1a1f2e; font-weight: 600; }
+  .timeline-text .note { font-size: 11px; color: #a0aec0; margin-top: 2px; }
+  .timeline-text .price { color: #d97706; font-weight: 500; }
+  .game-line { color: #e63946; font-weight: 700; }
+
+  /* TRANSPORT */
+  .transport-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0; }
+  .transport-table th { background: #f7fafc; color: #718096; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 14px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+  .transport-table td { padding: 11px 14px; border-bottom: 1px solid #f1f5f9; font-size: 13px; color: #4a5568; }
+  .transport-table tr:last-child td { border-bottom: none; }
+  .transport-table tr:hover td { background: #f7fafc; }
+
+  /* NOTES */
+  .note-card { background: #fff; border-left: 3px solid #3b82f6; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-bottom: 10px; border: 1px solid #e2e8f0; border-left: 3px solid #3b82f6; }
+  .note-card.warning { border-left-color: #d97706; }
+  .note-card.danger { border-left-color: #e63946; }
+  .note-card.success { border-left-color: #16a34a; }
+  .note-title { font-size: 13px; font-weight: 700; color: #1a1f2e; margin-bottom: 6px; }
+  .note-body { font-size: 12px; color: #718096; line-height: 1.9; }
+  .note-body strong { color: #4a5568; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <span style="font-size:22px;">⚾</span>
+    <h1>北海道看球行程</h1>
+    <span class="badge">4人</span>
+    <span style="color:#a0aec0;font-size:13px;">8/18（二）→ 8/22（六）</span>
+  </div>
+  <div class="header-sub">火腿鬥士 vs 軟銀鷹 · ES CON FIELD HOKKAIDO · 自駕＋大眾運輸混搭</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showPanel('overview', this)">總覽 &amp; 預算</div>
+  <div class="tab" onclick="showPanel('itinerary', this)">逐日行程</div>
+  <div class="tab" onclick="showPanel('transport', this)">交通規劃</div>
+  <div class="tab" onclick="showPanel('stay', this)">住宿</div>
+  <div class="tab" onclick="showPanel('notes', this)">注意事項</div>
+  <div class="tab" onclick="showPanel('ledger', this)">💰 記帳</div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="content panel active" id="panel-overview">
+
+  <div class="section-title">✈️ 選定航班</div>
+  <div class="flight-cards">
+    <div class="flight-card">
+      <div class="flight-label">去程 <span class="selected-tag">✓ 選用</span></div>
+      <div class="flight-route">
+        <div>
+          <div style="font-size:11px;color:#718096;">06:20 TPE</div>
+          <div class="flight-time">桃園</div>
+        </div>
+        <div class="flight-arrow">→</div>
+        <div>
+          <div style="font-size:11px;color:#718096;">11:05 CTS</div>
+          <div class="flight-time">新千歲</div>
+        </div>
+      </div>
+      <div class="flight-info">8/18（二）· 虎航 IT234 · A320<br>飛行時間：3小時45分</div>
+      <div class="luggage-note">⚠ 行李20kg 另付 NT$950/人（訂票時加購最便宜）</div>
+    </div>
+    <div class="flight-card">
+      <div class="flight-label">回程 <span class="selected-tag">✓ 選用</span></div>
+      <div class="flight-route">
+        <div>
+          <div style="font-size:11px;color:#718096;">19:10 CTS</div>
+          <div class="flight-time">新千歲</div>
+        </div>
+        <div class="flight-arrow">→</div>
+        <div>
+          <div style="font-size:11px;color:#718096;">22:35 TPE</div>
+          <div class="flight-time">桃園</div>
+        </div>
+      </div>
+      <div class="flight-info">8/22（六）· 酷航 TR893 · B787-800<br>飛行時間：4小時25分</div>
+      <div class="luggage-note">⚠ 行李需至酷航官網另行加購</div>
+    </div>
+  </div>
+
+  <div class="price-banner">
+    <div>
+      <div class="label">機票票價（含稅，已選 Option 1）</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="amount">NT$13,402<span style="font-size:13px;color:#718096;">/人</span></div>
+      <div class="sub">4人合計 NT$53,608</div>
+    </div>
+  </div>
+
+  <div class="section-title">⚾ 賽事資訊</div>
+  <div class="game-banner">
+    <div style="font-size:28px;">⚾</div>
+    <div class="info">
+      <div class="title">北海道日本火腿鬥士 vs 福岡軟銀鷹</div>
+      <div class="details">
+        8/18（二）· 8/19（三）· 8/20（四）<br>
+        每場 <strong style="color:#e63946;">14:00 開打</strong>，約 17:00–17:30 結束<br>
+        ES CON FIELD HOKKAIDO · 北廣島市 · 全場電子支付
+      </div>
+    </div>
+    <div class="game-badge">3場可看</div>
+  </div>
+
+  <div class="section-title">💰 預算估算</div>
+  <div class="budget-grid">
+    <div class="budget-card"><div class="icon">✈️</div><div class="label">機票（含稅）</div><div class="amount">NT$53,608</div><div class="per-person">NT$13,402/人</div></div>
+    <div class="budget-card"><div class="icon">🧳</div><div class="label">行李 20kg 去回</div><div class="amount">約 NT$7,800</div><div class="per-person">約 NT$1,950/人</div></div>
+    <div class="budget-card"><div class="icon">🚃</div><div class="label">大眾運輸</div><div class="amount">約 NT$8,800</div><div class="per-person">約 NT$2,200/人</div></div>
+    <div class="budget-card"><div class="icon">🚗</div><div class="label">租車 1天（8/21）</div><div class="amount">約 NT$5,300</div><div class="per-person">約 NT$1,325/人</div></div>
+    <div class="budget-card"><div class="icon">🏠</div><div class="label">住宿 Airbnb 4晚（整棟）</div><div class="amount">NT$12,000–18,000</div><div class="per-person">NT$3,000–4,500/人</div></div>
+    <div class="budget-card"><div class="icon">⚾</div><div class="label">球票（指定席 2場）</div><div class="amount">約 NT$7,920</div><div class="per-person">約 NT$1,980/人</div></div>
+    <div class="budget-card"><div class="icon">🍟</div><div class="label">球場內餐飲</div><div class="amount">約 NT$7,000</div><div class="per-person">約 NT$1,750/人</div></div>
+    <div class="budget-card"><div class="icon">🍜</div><div class="label">餐飲（5天）</div><div class="amount">約 NT$22,000</div><div class="per-person">約 NT$5,500/人</div></div>
+    <div class="budget-card"><div class="icon">🚡</div><div class="label">景點門票</div><div class="amount">約 NT$6,600</div><div class="per-person">約 NT$1,650/人</div></div>
+    <div class="budget-card"><div class="icon">🗂️</div><div class="label">雜費</div><div class="amount">約 NT$2,000</div><div class="per-person">約 NT$500/人</div></div>
+  </div>
+  <div class="budget-total">
+    <div>
+      <div class="label" style="font-weight:600;">小計（不含購物）</div>
+      <div class="sub" style="margin-top:4px;">購物/藥妝/伴手禮另計 NT$5,000–10,000/人</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="t-amount">NT$38,000–45,000<span style="font-size:13px;color:#718096;">/人</span></div>
+      <div class="sub">4人合計約 NT$152,000–180,000</div>
+    </div>
+  </div>
+</div>
+
+<!-- ITINERARY -->
+<div class="content panel" id="panel-itinerary">
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">DAY 1 · 8/18 二</div>
+      <div class="day-title">抵達 → 札幌市區 → 🍺 大通公園啤酒節（最終日！）</div>
+      <div class="day-tags"><span class="tag free">啤酒節</span><span class="tag transit">大眾運輸</span></div>
+    </div>
+    <div class="timeline-item"><div class="time-col">11:05</div><div class="dot"></div><div class="timeline-text"><span class="hl">新千歲空港抵達</span><div class="note">JR 快速エアポート → 札幌站（37分，¥1,150）</div></div></div>
+    <div class="timeline-item"><div class="time-col">12:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">飯店 check-in / 放行李</span></div></div>
+    <div class="timeline-item"><div class="time-col">12:30</div><div class="dot"></div><div class="timeline-text"><span class="hl">午餐：根室花丸迴轉壽司</span>（札幌車站 JR タワー店） <span class="price">¥2,000–3,000</span><div class="note">北海道最知名迴轉壽司，JR塔6F，下飛機第一餐就到位</div></div></div>
+    <div class="timeline-item"><div class="time-col">14:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">サッポロビール博物館</span>（免費入場，限定試飲 ¥200） <span class="price">約1.5小時</span><div class="note">北海道最老的啤酒廠，有導覽，出發前暖身用</div></div></div>
+    <div class="timeline-item"><div class="time-col">15:30</div><div class="dot"></div><div class="timeline-text"><span class="hl">大通公園散步</span>（電視塔展望台 ¥800 可選）→ 找 8 丁目位子</div></div>
+    <div class="timeline-item"><div class="time-col">17:00</div><div class="dot game"></div><div class="timeline-text"><span class="hl" style="color:#d97706;">🍺 さっぽろ大通ビアガーデン（最終日！）</span><div class="note">✅ 已確認：2026 年 7/23–8/18，你們到的當天剛好是最後一天。8丁目「THE SAPPORO BEER GARDEN」是主打札幌クラシック的主場地。免費入場，自由點餐，營業至 21:00</div></div></div>
+    <div class="timeline-item"><div class="time-col">17:00–21:00</div><div class="dot game"></div><div class="timeline-text"><span class="hl">暢飲＋放空</span>：クラシック生 <span class="price">¥700–900/杯</span>、成吉思汗、海鮮串燒 <span class="price">¥500–1,500/份</span></div></div>
+    <div class="timeline-item"><div class="time-col">21:00後</div><div class="dot"></div><div class="timeline-text"><span class="hl">狸小路商店街</span>：Majisand 水果三明治、mermaid coffee 咖啡豆、酒と銀seis 日本酒掃貨</div></div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">DAY 2 · 8/19 三</div>
+      <div class="day-title">🏟 ES CON FIELD 全日體驗 → ⚾ 比賽 → 藻岩山夜景</div>
+      <div class="day-tags"><span class="tag game">⚾ 比賽日</span><span class="tag transit">大眾運輸</span></div>
+    </div>
+    <div class="timeline-item"><div class="time-col">08:30</div><div class="dot"></div><div class="timeline-text"><span class="hl">早餐 + 整裝</span>（今天主場，衣著輕便舒適）</div></div>
+    <div class="timeline-item"><div class="time-col">10:00</div><div class="dot"></div><div class="timeline-text">JR 札幌→北廣島（17分）→ 接駁バス → <span class="hl">F VILLAGE 抵達</span></div></div>
+    <div class="timeline-item"><div class="time-col">10:30</div><div class="dot"></div><div class="timeline-text"><span class="hl">🌿 グラウンドウォーク体験</span>（走進天然芝球場） <span class="price">¥2,000 左右，需提前預約</span><div class="note">ES CON Field 獨有體驗，實際踏上比賽用天然草地，從球員視角看整個球場。建議從官網提前預約，通常在開賽前數小時舉行。無刺青限制，戶外開放空間</div></div></div>
+    <div class="timeline-item"><div class="time-col">12:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">球場グルメ：はちきょう「こぼれいくら丼」</span>（いくら滿到溢出來） or 七星横丁 探索<div class="note">七星横丁是球場內美食街，集結北海道名店：串鳥焼鳥、小樽なると屋ざんぎ（唐揚げ）、スープカレーなど</div></div></div>
+    <div class="timeline-item"><div class="time-col">13:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">球場各區導覽 + 紀念品掃貨</span><div class="note">官方 Shop「F MAGIC」：球衣、帽子、限定球場商品。建議比賽前買，賽後人潮更多</div></div></div>
+    <div class="timeline-item"><div class="time-col">13:30</div><div class="dot game"></div><div class="timeline-text"><span class="hl">そらとしば by よなよなエール</span> 入座 <span class="price">需提前預約</span><div class="note">センター後方屋頂平台，世界唯一球場內精釀啤酒釀造餐廳，視野最佳。提前1–2個月預約。若搶不到，3F 内野席也很好</div></div></div>
+    <div class="timeline-item"><div class="time-col">14:00</div><div class="dot game"></div><div class="timeline-text"><span class="game-line">⚾ 火腿 vs 軟銀！</span><div class="note">14:00開打，比賽約3小時。下午場光線好，天然芝球場視覺超美</div></div></div>
+    <div class="timeline-item"><div class="time-col">約17:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">賽後繼續留在 F VILLAGE</span><div class="note">アドベンチャーパーク外觀、球場塗鴉牆拍照、OUTLET 三井パーク北廣島逛逛</div></div></div>
+    <div class="timeline-item"><div class="time-col">18:30</div><div class="dot"></div><div class="timeline-text">接駁バス → JR 返札幌</div></div>
+    <div class="timeline-item"><div class="time-col">20:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">🚠 藻岩山纜車夜景</span>（日本三大夜景） <span class="price">¥2,100 往返，運行至22:00</span><div class="note">兩段纜車＋迷你纜車，從球場回來還趕得上夜景</div></div></div>
+    <div class="timeline-item"><div class="time-col">22:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">拉麵札幌赤星</span> 宵夜（狸小路，備現金） <span class="price">¥1,200，11:00–23:00</span></div></div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">DAY 3 · 8/20 四</div>
+      <div class="day-title">小樽全天：青之洞窟 + 三角市場 + 運河</div>
+      <div class="day-tags"><span class="tag transit">大眾運輸</span><span class="tag free">無球賽</span></div>
+    </div>
+    <div class="timeline-item"><div class="time-col">07:30</div><div class="dot"></div><div class="timeline-text">JR 札幌→小樽（40分，¥750）</div></div>
+    <div class="timeline-item"><div class="time-col">08:15</div><div class="dot"></div><div class="timeline-text"><span class="hl">三角市場早市</span> — 帝王蟹 or 海膽＋鮭魚卵丼 <span class="price">¥3,000–5,000</span><div class="note">要早到，熱門座位很快被佔滿</div></div></div>
+    <div class="timeline-item"><div class="time-col">09:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">🚣 青之洞窟 SUP/划船體驗</span> <span class="price">¥4,000–6,000/人，約2小時</span><div class="note">⚠ 需提前預約，早場約 09:00 出發。天氣因素可能取消，建議選有保險的業者</div></div></div>
+    <div class="timeline-item"><div class="time-col">11:30</div><div class="dot"></div><div class="timeline-text"><span class="hl">小樽運河</span> 拍照（午前光線最好）</div></div>
+    <div class="timeline-item"><div class="time-col">12:30</div><div class="dot"></div><div class="timeline-text"><span class="hl">堺町通り</span>：LeTAO 本店雙層乳酪蛋糕 <span class="price">¥1,000</span> ＋ 北一硝子玻璃工藝、小樽音樂盒堂</div></div>
+    <div class="timeline-item"><div class="time-col">14:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">小樽市内咖啡館</span> 下午茶，不用趕車，悠閒逛</div></div>
+    <div class="timeline-item"><div class="time-col">16:00</div><div class="dot"></div><div class="timeline-text">JR 返札幌（40分，¥750）</div></div>
+    <div class="timeline-item"><div class="time-col">17:30</div><div class="dot"></div><div class="timeline-text"><span class="hl">晚餐：札幌市區自選</span>（湯咖哩二訪 or 一幻えびそば or すすきの居酒屋）</div></div>
+    <div class="timeline-item"><div class="time-col">19:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">北海道大學校園夜散步</span>（免費）or 狸小路繼續掃貨</div></div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">DAY 4 · 8/21 五</div>
+      <div class="day-title">🚗 自駕：旭川 → 美瑛（略過富良野，悠閒版）</div>
+      <div class="day-tags"><span class="tag drive">🚗 租車日</span><span class="tag free">無球賽</span></div>
+    </div>
+    <div class="timeline-item"><div class="time-col">08:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">取車</span>（札幌市內 Toyota/Orix 門市）<div class="note">S 級轎車 ¥9,900–12,000/天，4人分攤；記得出發前辦台灣駕照日文譯本</div></div></div>
+    <div class="timeline-item"><div class="time-col">08:15</div><div class="dot"></div><div class="timeline-text">道央道出發→旭川（約1.5小時）</div></div>
+    <div class="timeline-item"><div class="time-col">09:45</div><div class="dot"></div><div class="timeline-text"><span class="hl">男山酒造資料館</span>（免費，清酒歷史展示＋試飲） <span class="price">約30分</span></div></div>
+    <div class="timeline-item"><div class="time-col">10:30</div><div class="dot"></div><div class="timeline-text"><span class="hl">高砂酒造</span>（「國士無双」「旭神威」＋藏元限定直賣） <span class="price">約30分</span><div class="note">限定酒只有直賣店才買得到，愛喝酒必來</div></div></div>
+    <div class="timeline-item"><div class="time-col">11:30</div><div class="dot"></div><div class="timeline-text"><span class="hl">大雪地ビール館</span> 午餐 <span class="price">旭川在地精釀＋成吉思汗 ¥2,500</span><div class="note">旭川的精釀啤酒聖地，窗外有農田景色，氣氛很好</div></div></div>
+    <div class="timeline-item"><div class="time-col">13:30</div><div class="dot"></div><div class="timeline-text">旭川→美瑛（約30分）</div></div>
+    <div class="timeline-item"><div class="time-col">14:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">白金青池（Blue Pond）</span>（免費）＋ 白鬚瀑布<div class="note">晴天呈夢幻寶藍色，8月早午後色彩最飽和</div></div></div>
+    <div class="timeline-item"><div class="time-col">15:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">拼布之路自駕</span>：Ken &amp; Mary の木・七星之木・北西之丘展望公園<div class="note">沿途邊開邊停，不趕路，這次不去富良野所以有更多時間在這</div></div></div>
+    <div class="timeline-item"><div class="time-col">17:00</div><div class="dot"></div><div class="timeline-text">高速返札幌（約1.5小時）</div></div>
+    <div class="timeline-item"><div class="time-col">18:30</div><div class="dot"></div><div class="timeline-text">還車 → <span class="hl">晚餐：成吉思汗だるま（最老字號本店）</span> <span class="price">¥2,500</span></div></div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">DAY 5 · 8/22 六</div>
+      <div class="day-title">札幌收尾：大倉山 → 神宮 → 退稅購物 → ✈️ 19:10 返台</div>
+      <div class="day-tags"><span class="tag transit">大眾運輸</span><span class="tag free">返台日</span></div>
+    </div>
+    <div class="timeline-item"><div class="time-col">09:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">どんぐり 早餐</span>（在地麵包，最後一次）</div></div>
+    <div class="timeline-item"><div class="time-col">09:30</div><div class="dot"></div><div class="timeline-text"><span class="hl">🚡 大倉山展望台</span>（跳台滑雪纜車往返） <span class="price">¥1,000</span><div class="note">返台日輕鬆俯瞰整個札幌作為收尾，地鐵「円山公園」站→市バス約10分</div></div></div>
+    <div class="timeline-item"><div class="time-col">10:30</div><div class="dot"></div><div class="timeline-text"><span class="hl">北海道神宮</span>（免費）→ 円山公園散步，買最後一次旅遊氣息</div></div>
+    <div class="timeline-item"><div class="time-col">11:30</div><div class="dot"></div><div class="timeline-text"><span class="hl">午餐：一幻 えびそば</span>（海老拉麵，這次必吃）<span class="price"> ¥1,100</span></div></div>
+    <div class="timeline-item"><div class="time-col">13:00</div><div class="dot"></div><div class="timeline-text"><span class="hl">Stellar Place + 丸井今井 最終血拼 + 退稅</span><div class="note">購物超 ¥5,500 可退稅約 8%，帶齊所有收據到退稅窗口一次辦理。狸小路最後掃藥妝</div></div></div>
+    <div class="timeline-item"><div class="time-col">16:00</div><div class="dot"></div><div class="timeline-text">JR 快速エアポート → 新千歲（37分）</div></div>
+    <div class="timeline-item"><div class="time-col">16:40</div><div class="dot"></div><div class="timeline-text"><span class="hl">酷航 TR893 check-in</span>（建議提前90分鐘）→ 安檢</div></div>
+    <div class="timeline-item"><div class="time-col">17:30</div><div class="dot"></div><div class="timeline-text">機場掃貨：ROYCE' 生巧克力 / 白色戀人 / 六花亭 / じゃがポックル</div></div>
+    <div class="timeline-item"><div class="time-col">19:10</div><div class="dot game"></div><div class="timeline-text"><span class="hl game-line">✈️ 酷航 TR893 返台</span> → 22:35 抵桃園</div></div>
+  </div>
+</div>
+
+<!-- STAY -->
+<div class="content panel" id="panel-stay">
+
+  <div class="note-card danger">
+    <div class="note-title">⚡ 旺季要早訂！</div>
+    <div class="note-body">8/18–8/22 是北海道暑假旺季 ＋ 火腿主場賽事期間，熱門飯店會提早售罄且價格持續上漲。建議確定行程後<strong>立刻預訂</strong>，至少提前2個月。</div>
+  </div>
+
+  <div class="section-title">📍 建議住宿位置</div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:20px;">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:140px;text-align:center;background:#eff6ff;border-radius:8px;padding:12px;">
+        <div style="font-size:18px;margin-bottom:4px;">⭐</div>
+        <div style="font-size:13px;font-weight:700;color:#1a1f2e;">すすきの</div>
+        <div style="font-size:11px;color:#718096;margin-top:4px;">夜遊方便、居酒屋/拉麵徒步圈、地鐵直達</div>
+      </div>
+      <div style="flex:1;min-width:140px;text-align:center;background:#f0fdf4;border-radius:8px;padding:12px;">
+        <div style="font-size:18px;margin-bottom:4px;">✅</div>
+        <div style="font-size:13px;font-weight:700;color:#1a1f2e;">大通</div>
+        <div style="font-size:11px;color:#718096;margin-top:4px;">中心位置、電視塔旁、地鐵換乘最便利</div>
+      </div>
+      <div style="flex:1;min-width:140px;text-align:center;background:#f7fafc;border-radius:8px;padding:12px;">
+        <div style="font-size:18px;margin-bottom:4px;">🚉</div>
+        <div style="font-size:13px;font-weight:700;color:#1a1f2e;">札幌駅周辺</div>
+        <div style="font-size:11px;color:#718096;margin-top:4px;">JR 最方便、機場直達、稍遠離夜生活區</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🏨 飯店推薦（2間房 × 4晚）</div>
+
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:12px;">
+    <div style="background:#1a1f2e;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="color:#fff;font-size:14px;font-weight:700;">🥇 Dormy Inn 系列</div>
+      <div style="background:#f0a500;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;">最推薦</div>
+    </div>
+    <div style="padding:16px 18px;">
+      <div style="font-size:12px;color:#4a5568;line-height:1.9;">
+        <strong>Dormy Inn 札幌すすきの</strong> or <strong>Dormy Inn PREMIUM 札幌</strong><br>
+        • 天然溫泉大浴場（男女分開）入住就可泡，完全解決旅途疲勞<br>
+        • 深夜拉麵 FREE（22:30–翌日01:00，蜆仔湯拉麵無限追加）<br>
+        • 位置在すすきの，狸小路走路5分<br>
+        • 2間房約 <strong style="color:#2563eb;">¥9,000–14,000/晚</strong>（旺季浮動）<br>
+        • 預訂：<span style="color:#2563eb;">booking.com / Dormy Inn 官網</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:12px;">
+    <div style="background:#2d3652;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="color:#fff;font-size:14px;font-weight:700;">🥈 Cross Hotel Sapporo</div>
+      <div style="background:#4a5568;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;">設計感佳</div>
+    </div>
+    <div style="padding:16px 18px;">
+      <div style="font-size:12px;color:#4a5568;line-height:1.9;">
+        • 大通×すすきの中間地帶，走路到哪都方便<br>
+        • 設計感比一般商務飯店好，房間寬敞<br>
+        • 2間房約 <strong style="color:#2563eb;">¥8,000–12,000/晚</strong><br>
+        • 預訂：<span style="color:#2563eb;">booking.com / じゃらん</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:20px;">
+    <div style="background:#16a34a;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="color:#fff;font-size:14px;font-weight:700;">💰 Richmond Hotel 札幌大通</div>
+      <div style="background:#15803d;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;">預算友善</div>
+    </div>
+    <div style="padding:16px 18px;">
+      <div style="font-size:12px;color:#4a5568;line-height:1.9;">
+        • 大通公園旁，地鐵大通站直結<br>
+        • 品牌連鎖，品質穩定，早餐選項佳<br>
+        • 2間房約 <strong style="color:#2563eb;">¥7,000–10,000/晚</strong><br>
+        • 預訂：<span style="color:#2563eb;">booking.com</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🏠 Airbnb 整棟公寓（4人同住）</div>
+
+  <div class="note-card success">
+    <div class="note-title">均攤下來比飯店便宜，適合熟識的4人一起住</div>
+    <div class="note-body">
+      • 搜尋區域：<strong>すすきの / 中央区 / 大通</strong><br>
+      • 4人整棟公寓約 <strong>¥15,000–22,000/晚</strong>（均攤 ¥3,750–5,500/人）<br>
+      • 有廚房可放伴手禮冰鮮品、行李分開擺不擠<br>
+      • 選擇標準：<strong>100+ 評價、4.7星以上、近地鐵站步行5分內</strong><br>
+      • ⚠ 日本 Airbnb 法規較嚴，確認房源有「民泊届出番号」才合法
+    </div>
+  </div>
+
+  <div class="section-title">📊 4晚住宿費用試算</div>
+  <table class="transport-table">
+    <thead>
+      <tr><th>方案</th><th>費用/晚</th><th>4晚合計</th><th>每人均攤</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Dormy Inn（2間房）</td><td>¥9,000–14,000</td><td>¥36,000–56,000</td><td>¥9,000–14,000</td></tr>
+      <tr><td>Cross Hotel（2間房）</td><td>¥8,000–12,000</td><td>¥32,000–48,000</td><td>¥8,000–12,000</td></tr>
+      <tr><td>Richmond（2間房）</td><td>¥7,000–10,000</td><td>¥28,000–40,000</td><td>¥7,000–10,000</td></tr>
+      <tr><td>Airbnb 整棟（4人）</td><td>¥15,000–22,000</td><td>¥60,000–88,000</td><td>¥15,000–22,000</td></tr>
+    </tbody>
+  </table>
+  <div style="font-size:11px;color:#a0aec0;margin-top:8px;">※ 旺季實際價格浮動較大，以訂房當下顯示為準</div>
+
+</div>
+
+<!-- TRANSPORT -->
+<div class="content panel" id="panel-transport">
+  <div class="section-title">🚃 各段交通方式</div>
+  <table class="transport-table">
+    <thead>
+      <tr><th>路段</th><th>方式</th><th>時間</th><th>費用/人</th><th>使用日</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>新千歲 ↔ 札幌</td><td>JR 快速エアポート</td><td>37分</td><td>¥1,150</td><td>8/18 入、8/22 出</td></tr>
+      <tr><td>札幌市內</td><td>地鐵一日券</td><td>—</td><td>¥830/天</td><td>8/18–8/20、8/22</td></tr>
+      <tr><td>札幌 ↔ 北廣島（球場）</td><td>JR + 接駁バス</td><td>22分</td><td>¥650/趟</td><td>8/18、8/19、8/20</td></tr>
+      <tr><td>札幌 ↔ 小樽</td><td>JR 函館本線</td><td>40分</td><td>¥750/趟</td><td>8/20</td></tr>
+      <tr><td>藻岩山ロープウェイ</td><td>市電 + 纜車</td><td>—</td><td>¥2,100 往返</td><td>8/19 夜</td></tr>
+      <tr><td>札幌 ↔ 定山溪溫泉</td><td>じょうてつバス</td><td>60分</td><td>¥800/趟</td><td>8/22</td></tr>
+      <tr><td>札幌 → 美瑛/富良野 → 札幌</td><td>🚗 租車（唯一自駕日）</td><td>來回各約2小時</td><td>約¥2,500/人含油費</td><td>8/21</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title" style="margin-top:24px;">⚾ 球場交通詳細（3場皆適用）</div>
+  <div class="note-card">
+    <div class="note-title">JR 札幌 → 北廣島（17分，¥420）</div>
+    <div class="note-body">
+      JR 千歲線，各停或快速列車，¥420。比賽日有加班車，不需特別等。<br><br>
+      <strong>接駁バス（北廣島站西口）：</strong>比賽前3小時開始增班，¥230（下車付款，刷卡 ok），約5分鐘到 F VILLAGE 入口。<br><br>
+      💡 <strong>14:00 開打建議時程：</strong>12:40 搭 JR → 13:00 北廣島 → 13:05 巴士 → 13:30 入場，有30分鐘逛紀念品店。
+    </div>
+  </div>
+</div>
+
+<!-- NOTES -->
+<div class="content panel" id="panel-notes">
+
+  <div class="note-card danger">
+    <div class="note-title">🚢 函館這次排不進去</div>
+    <div class="note-body">
+      函館從札幌搭 JR 單程約 <strong>3.5 小時</strong>，來回就耗掉一整天，景點還需要半天以上。5 天行程硬塞只會變成趕路之旅，不值得。<br><br>
+      <strong>函館清單（留下次）：</strong>夜景（城岱牧場展望台，4點前上山）、五稜郭、湯之川溫泉、幸運小丑漢堡、茶房HISHI伊、金森紅磚倉庫、函館超市買螃蟹、根室花丸（函館車站店）、湯倉神社<br><br>
+      建議另外安排 <strong>3 天函館專程</strong>，搭夜行巴士或 JR 過去留宿更值得。
+    </div>
+  </div>
+
+  <div class="section-title">🏟 ES CON FIELD 球場攻略</div>
+
+  <div class="note-card warning">
+    <div class="note-title">🛁 TOWER11 onsen &amp; sauna ── 刺青注意</div>
+    <div class="note-body">
+      レフト側獨棟5層建築，命名取自大谷翔平＆達比修有背號「11」，世界唯一可一邊泡湯一邊俯瞰球場的溫泉。<br><br>
+      ⚠️ <strong>刺青政策未確認</strong>：官網未明列刺青規定，有刺青者建議出發前先聯繫確認。<br>
+      詢問語句：「タトゥーがありますが、入浴は可能ですか？」<br><br>
+      • 若可入場：費用約 ¥2,000–4,000（比賽日較貴），建議比賽前10:30入場<br>
+      • 若不行：行程已改為グラウンドウォーク替代
+    </div>
+  </div>
+
+  <div class="note-card">
+    <div class="note-title">🍺 そらとしば by よなよなエール ── 最佳觀戰座席</div>
+    <div class="note-body">
+      センター後方屋頂平台，世界首座球場內精釀啤酒釀造餐廳。<br>
+      • 視野：可俯瞰整個天然芝球場，照片超好看<br>
+      • 需提前 <strong>1–2個月</strong> 至官網預約，非常搶手<br>
+      • 附餐飲，精釀 IPA 配看球體驗無敵<br>
+      • 若沒搶到：3F センター指定席也可清楚看到そらとしば下方的 Batter's Eye
+    </div>
+  </div>
+
+  <div class="note-card">
+    <div class="note-title">🍜 七星横丁 ── 球場內美食街必逛</div>
+    <div class="note-body">
+      球場 1F 美食街，集結北海道名店：<br>
+      • <strong>はちきょう</strong>：こぼれいくら丼（鮭魚卵滿到溢出來的名物）<br>
+      • <strong>小樽なると屋</strong>：ざんぎ（北海道式唐揚げ）<br>
+      • <strong>串鳥</strong>：北海道最知名居酒屋焼鳥<br>
+      • <strong>明太子薯條</strong>：球場人氣第一 ¥600<br>
+      • 全場無現金，只接受信用卡 / Suica / 行動支付
+    </div>
+  </div>
+
+  <div class="note-card">
+    <div class="note-title">🎽 紀念品 ── F MAGIC 官方 Shop</div>
+    <div class="note-body">
+      球場 1F 官方商店，建議 <strong>比賽開始前購買</strong>，比賽結束後人擠人。<br>
+      • 球衣 ¥7,000–15,000（可加購背號印字）<br>
+      • 帽子 ¥3,500–5,000<br>
+      • 球場限定商品每季不同，先到先得
+    </div>
+  </div>
+
+  <div class="note-card">
+    <div class="note-title">🏟 推薦席種一覽</div>
+    <div class="note-body">
+      • <strong>そらとしばシート</strong>：最有氣氛，含餐飲，需提前預約 ★★★★★<br>
+      • <strong>3F 内野指定席</strong>：視野均衡，¥4,500–5,500，性價比最高 ★★★★<br>
+      • <strong>1F フィールドレベル</strong>：最近球員，¥8,000起，臨場感超強 ★★★★<br>
+      • <strong>外野應援席</strong>：想感受応援團熱鬧氣氛首選，便宜 ★★★
+    </div>
+  </div>
+
+  <div class="section-title">⚾ 球場注意事項</div>
+  <div class="note-card warning">
+    <div class="note-title">🎫 電子票換紙本紀念票（待確認）</div>
+    <div class="note-body">
+      • F NEOBANK GATE（三壘側場外）= 當日票窗口，有發券服務（¥100/張手續費）<br>
+      • 電子票是否可換印紙本紀念票：官方未明確說明，<strong>入場前直接到 F NEOBANK GATE 外窗口詢問工作人員確認</strong><br>
+      • 也可試場內 FIELD LEVEL 三壘側的前售票窗口
+    </div>
+  </div>
+  <div class="note-card danger">
+    <div class="note-title">💳 全場無現金，只收電子支付</div>
+    <div class="note-body">信用卡、Suica/西瓜卡、行動支付皆可。出發前確認 Suica 有餘額或信用卡在日本可正常使用。</div>
+  </div>
+  <div class="note-card warning">
+    <div class="note-title">🚫 禁止攜帶外食與瓶裝飲料入場</div>
+    <div class="note-body">連超商買的礦泉水都不能帶入。場內飲料統一 ¥380。建議自備保溫杯（可裝熱水），或做好場內花費預算。</div>
+  </div>
+  <div class="note-card">
+    <div class="note-title">🎟 購票方式</div>
+    <div class="note-body">
+      • <strong>F-ticket 官網</strong>：ticket.fighters.co.jp（需免費註冊 F VILLAGE 帳號）<br>
+      • <strong>台灣 Tixcraft</strong>：tixcraft.com 有代售，中文介面較方便<br>
+      • 建議選「<strong>指定席 3F 内野</strong>」，¥4,500–5,500/人，視野好不曬太陽<br>
+      • 電子票 QR code 入場，4人可用1支手機逐一掃碼
+    </div>
+  </div>
+  <div class="note-card success">
+    <div class="note-title">🧥 8月球場建議帶薄外套</div>
+    <div class="note-body">北廣島日場午後可能有涼風，比賽延長時更明顯。包包塞一件輕薄外套備用。</div>
+  </div>
+
+  <div class="section-title" style="margin-top:24px;">🚗 租車注意事項</div>
+  <div class="note-card warning">
+    <div class="note-title">📋 台灣駕照日文譯本（重要！）</div>
+    <div class="note-body">
+      台灣駕照 + <strong>日文譯本</strong> = 可在日本租車（不需國際駕照）。<br>
+      譯本需在<strong>台灣各地監理站申辦</strong>，費用 NT$100 左右，需 3–5 個工作天。<br>
+      ⚠️ 沒有譯本無法取車，務必提前辦理！
+    </div>
+  </div>
+  <div class="note-card">
+    <div class="note-title">🚗 租車建議</div>
+    <div class="note-body">
+      • 車型：Toyota S 級轎車（4人含行李剛好）或 VOXY/NOAH 7人座（更舒適）<br>
+      • 8月北海道旺季，<strong>提前1個月以上</strong>預約<br>
+      • 租 ETC 卡（¥330/天），高速不用停車買票<br>
+      • 建議還車到<strong>札幌市內門市</strong>，比機場門市便宜
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:24px;">🎫 機票訂位紀錄</div>
+  <div class="note-card" style="background:#f0f9ff;border-left:4px solid #0ea5e9;">
+    <div class="note-title" style="color:#0369a1;">Kung Suyi</div>
+    <div class="note-body">
+      • 去程 虎航 IT234｜官網訂｜PNR：<strong>BCP8XX</strong>｜NT$8,549<br>
+      • 回程 酷航 TR893｜trip.com 訂｜PNR：<strong>S5HB9L</strong>（航空公司代號 G2W5NY？）｜NT$8,630<br>
+      • 小計：<strong>NT$17,179</strong>
+    </div>
+  </div>
+  <div class="note-card" style="background:#f0f9ff;border-left:4px solid #0ea5e9;margin-top:10px;">
+    <div class="note-title" style="color:#0369a1;">Yang Yuju</div>
+    <div class="note-body">
+      • 去程 虎航 IT234｜PNR：<strong>G2W5NY</strong><br>
+      • 回程 酷航 TR893｜PNR：<strong>VCNUVW</strong><br>
+      • 總金額：<strong>NT$16,969</strong>
+    </div>
+  </div>
+  <div class="note-card warning" style="margin-top:10px;">
+    <div class="note-body" style="color:#92400e;">⏳ 另外 2 人機票待補</div>
+  </div>
+
+  <div class="section-title" style="margin-top:24px;">✈️ 行李注意事項</div>
+  <div class="note-card danger">
+    <div class="note-title">🧳 去回不同航空，行李需分開加購</div>
+    <div class="note-body">
+      • <strong>去程 虎航 IT234</strong>：在虎航官網訂票時加購 20kg，¥950/人（訂票當下最便宜，事後更貴）<br>
+      • <strong>回程 酷航 TR893</strong>：另至酷航官網單獨加購 20kg 行李<br>
+      • 兩段為獨立訂位，需分開處理，不要搞混！
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:24px;">💴 退稅小技巧</div>
+  <div class="note-card success">
+    <div class="note-title">同日消費 ¥5,500 以上可退稅約 8%</div>
+    <div class="note-body">
+      • 大丸、Stellar Place、三井 Outlet 都有退稅服務<br>
+      • 當天收據集中到退稅窗口，一次辦理最方便<br>
+      • 建議提早辦，不要卡在 check-in 前才衝<br>
+      • 退稅商品需密封帶出境，不能在日本境內開封使用
+    </div>
+  </div>
+</div>
+
+<div class="content panel" id="panel-ledger">
+  <div class="section-title">💰 實際支出記帳</div>
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;">
+      <thead>
+        <tr style="background:#1a1f2e;color:#fff;">
+          <th style="padding:10px 12px;text-align:left;">項目</th>
+          <th style="padding:10px 12px;text-align:right;">金額（NT$）</th>
+          <th style="padding:10px 12px;text-align:center;">人均</th>
+          <th style="padding:10px 12px;text-align:center;">付款人</th>
+          <th style="padding:10px 12px;text-align:center;">狀態</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;">⚾ 棒球票（4人）</td>
+          <td style="padding:10px 12px;text-align:right;font-weight:600;">6,126</td>
+          <td style="padding:10px 12px;text-align:center;color:#718096;">1,532/人</td>
+          <td style="padding:10px 12px;text-align:center;"><span style="background:#dbeafe;color:#1e40af;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600;">Sam</span></td>
+          <td style="padding:10px 12px;text-align:center;"><span style="background:#dcfce7;color:#166534;padding:2px 8px;border-radius:10px;font-size:12px;">✓ 已付</span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr style="background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:700;">合計</td>
+          <td style="padding:10px 12px;text-align:right;font-weight:700;color:#2563eb;">6,126</td>
+          <td colspan="3" style="padding:10px 12px;text-align:center;color:#718096;font-size:12px;">待結算：各自回補 Sam NT$1,532</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div style="margin-top:12px;padding:10px 14px;background:#fefce8;border-radius:8px;font-size:12px;color:#92400e;">
+    💡 後續每筆支出告訴我：項目、金額、付款人，我幫你更新表格
+  </div>
+</div>
+
+<script>
+function showPanel(name, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
