@@ -145,6 +145,7 @@
   <div class="tab" onclick="showPanel('notes', this)">注意事項</div>
   <div class="tab" onclick="showPanel('ledger', this)">💰 記帳</div>
   <div class="tab" onclick="showPanel('shopping', this)">🛍️ 購物清單</div>
+  <div class="tab" onclick="showPanel('food', this)">🍜 美食 &amp; 咖啡</div>
 </div>
 
 <!-- OVERVIEW -->
@@ -895,14 +896,107 @@
     </div>
   </div>
 
-  <div class="note-card success">
-    <div class="note-title">📹 來源：東京情報猿 三集影片</div>
-    <div class="note-body">
-      <a href="https://www.youtube.com/watch?v=XCUfrx3m39c" target="_blank" style="color:#3b82f6;">上集（STELLAR PLACE）</a> ｜
-      <a href="https://www.youtube.com/watch?v=85dWHmmfenQ" target="_blank" style="color:#3b82f6;">中集（PARCO + 大通）</a> ｜
-      <a href="https://www.youtube.com/watch?v=h1ryIxU-MWE" target="_blank" style="color:#3b82f6;">下集（Factory + 獨立店）</a><br>
-      全部 44 間店均已 Google Maps / 官網交叉驗證，2025–2026 確認在營
-    </div>
+</div>
+
+<div class="content panel" id="panel-food">
+  <div class="section-title">☕ 咖啡</div>
+  <div style="overflow-x:auto;margin-bottom:20px;">
+    <table class="transport-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="background:#1a1f2e;color:#fff;">
+        <th style="padding:10px 12px;text-align:left;">店名</th>
+        <th style="padding:10px 12px;text-align:left;">特色</th>
+        <th style="padding:10px 12px;text-align:left;">地址 / 時間</th>
+        <th style="padding:10px 12px;text-align:center;">地圖</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">森彦 MORIHICO<br><span style="font-size:11px;color:#718096;font-weight:400;">本店（円山）</span></td>
+          <td style="padding:10px 12px;color:#4a5568;">1996年創業昭和古民家改建，本店限定「森の雫」深焙必點</td>
+          <td style="padding:10px 12px;color:#718096;">南2西26丁目｜⏰ 9:00–20:00｜円山公園站④出口步行4分</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/place/森彦/@43.0533134,141.3186102,17z" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">Brew it by NODE<br><span style="font-size:11px;color:#718096;font-weight:400;">狸小路</span></td>
+          <td style="padding:10px 12px;color:#4a5568;">Q Arabica Grader 認證，競標豆、藝妓常態供應，すすきの旁最方便</td>
+          <td style="padding:10px 12px;color:#718096;">南3西3丁目｜⏰ 9:00–18:00（日12:00–）｜定休：木曜｜すすきの站1號出口即到</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://goo.gl/maps/5FzKqVdJR4y9Gh4s9" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">BARISTART COFFEE<br><span style="font-size:11px;color:#718096;font-weight:400;">大通</span></td>
+          <td style="padding:10px 12px;color:#4a5568;">希少ジャージー牛乳拿鐵，可自選豆子×牛奶客製組合</td>
+          <td style="padding:10px 12px;color:#718096;">南1西4丁目｜⏰ 10:00–18:00｜大通站10號出口步行3分</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://goo.gl/maps/L5H9pM1GP9cNHpMv5" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">🍜 美食</div>
+  <div style="overflow-x:auto;margin-bottom:20px;">
+    <table class="transport-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="background:#1a1f2e;color:#fff;">
+        <th style="padding:10px 12px;text-align:left;">店名</th>
+        <th style="padding:10px 12px;text-align:left;">分類</th>
+        <th style="padding:10px 12px;text-align:left;">特色</th>
+        <th style="padding:10px 12px;text-align:center;">地圖</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">はちきょう</td>
+          <td style="padding:10px 12px;color:#718096;">海鮮丼</td>
+          <td style="padding:10px 12px;color:#4a5568;">こぼれいくら丼，鮭魚卵滿到溢出來的名物，球場グルメ必吃</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/はちきょう+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">十勝豚丼 いっぴん</td>
+          <td style="padding:10px 12px;color:#718096;">豚丼</td>
+          <td style="padding:10px 12px;color:#4a5568;">十勝名物豚丼，炭火香氣濃郁</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/十勝豚丼いっぴん+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">SOUP CURRY TREASURE</td>
+          <td style="padding:10px 12px;color:#718096;">湯咖哩</td>
+          <td style="padding:10px 12px;color:#4a5568;">北海道湯咖哩代表，湯底濃郁香料層次豐富</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/SOUP+CURRY+TREASURE+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">回転寿司 根室花まる</td>
+          <td style="padding:10px 12px;color:#718096;">迴轉壽司</td>
+          <td style="padding:10px 12px;color:#4a5568;">北海道在地鮮魚，CP值極高，常大排長龍</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/根室花まる+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">迴轉壽司 トリトン</td>
+          <td style="padding:10px 12px;color:#718096;">迴轉壽司</td>
+          <td style="padding:10px 12px;color:#4a5568;">道産魚貝類直送，生筋子、毛蟹等稀有食材</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/回転寿司トリトン+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">二條市場 大磯</td>
+          <td style="padding:10px 12px;color:#718096;">海鮮丼</td>
+          <td style="padding:10px 12px;color:#4a5568;">二條市場百年老店，早市鮮魚海鮮丼</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/二条市場+大磯+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">北菓樓</td>
+          <td style="padding:10px 12px;color:#718096;">甜點伴手禮</td>
+          <td style="padding:10px 12px;color:#4a5568;">北海道代表性菓子品牌，夢不思議、巴麥大地等必買</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/北菓楼+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">Majisand</td>
+          <td style="padding:10px 12px;color:#718096;">水果三明治</td>
+          <td style="padding:10px 12px;color:#4a5568;">狸小路商店街，北海道水果夾心三明治，外酥內嫩</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/Majisand+札幌+狸小路" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">積丹 生海膽</td>
+          <td style="padding:10px 12px;color:#718096;">海膽丼</td>
+          <td style="padding:10px 12px;color:#4a5568;">8月產季尾聲，積丹半島在地食堂限定，¥3,000–5,000/碗</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/積丹+生雲丹+食堂" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
