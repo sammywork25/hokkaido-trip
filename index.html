@@ -141,11 +141,11 @@
   <div class="tab active" onclick="showPanel('overview', this)">總覽 &amp; 預算</div>
   <div class="tab" onclick="showPanel('itinerary', this)">逐日行程</div>
   <div class="tab" onclick="showPanel('transport', this)">交通規劃</div>
+  <div class="tab" onclick="showPanel('shopping', this)">🛍️ 購物清單</div>
+  <div class="tab" onclick="showPanel('food', this)">🍜 美食 &amp; 咖啡</div>
   <div class="tab" onclick="showPanel('stay', this)">住宿</div>
   <div class="tab" onclick="showPanel('notes', this)">注意事項</div>
   <div class="tab" onclick="showPanel('ledger', this)">💰 記帳</div>
-  <div class="tab" onclick="showPanel('shopping', this)">🛍️ 購物清單</div>
-  <div class="tab" onclick="showPanel('food', this)">🍜 美食 &amp; 咖啡</div>
 </div>
 
 <!-- OVERVIEW -->
@@ -248,7 +248,6 @@
   </div>
 </div>
 
-<!-- ITINERARY -->
 <div class="content panel" id="panel-itinerary">
 
   <div class="day-card">
@@ -373,28 +372,6 @@
   </div>
 </div>
 
-<!-- STAY -->
-<div class="content panel" id="panel-stay">
-
-  <div class="section-title">🏠 住宿（已確認）</div>
-
-  <div class="note-card success">
-    <div class="note-title">✅ Airbnb 整棟公寓 — 已訂</div>
-    <div class="note-body">
-      🗺 <a href="https://maps.app.goo.gl/hCQT8iMzhsFrxQHW8" target="_blank" style="color:#3b82f6;">Google Maps 位置</a>　｜　
-      <a href="https://www.airbnb.com.tw/rooms/1635331425290185956?adults=1&children=0&infants=0&pets=0&wishlist_item_id=11006523626056&check_in=2026-08-18&check_out=2026-08-22&source_impression_id=p3_1783155664_P3Filh9S8TUMVVxJ&previous_page_section_name=1000" target="_blank" style="color:#16a34a;font-weight:700;">Airbnb 訂單頁面</a><br><br>
-      💳 刷卡金額：<strong style="color:#1a1f2e;">NT$26,718</strong>（4晚合計，均攤 <strong>NT$6,680/人</strong>）<br>
-      🕒 入住：<strong>8/18（二）15:00</strong>　｜　退房：<strong>8/22（六）10:00</strong><br>
-      • 4人整棟公寓，有廚房可放伴手禮冰鮮品<br>
-      • ⚠ 請保管好門鎖資訊，確認聯絡房東 LINE / 電話
-    </div>
-  </div>
-
-  <div class="section-title" style="margin-top:24px;">⚾ 球場交通詳細（8/19 適用）</div>
-
-</div>
-
-<!-- TRANSPORT -->
 <div class="content panel" id="panel-transport">
   <div class="section-title">🚃 各段交通方式</div>
   <table class="transport-table">
@@ -422,7 +399,323 @@
   </div>
 </div>
 
-<!-- NOTES -->
+<div class="content panel" id="panel-shopping">
+  <div class="note-card danger" style="margin-bottom:16px;">
+    <div class="note-title">⚠️ 重要更新（影片拍攝後已變動）</div>
+    <div class="note-body">
+      • <strong>Stellar Place 閉店</strong>：2026/4/1 起提早至 <strong>20:00</strong>（原21:00）<br>
+      • <strong>ARC'TERYX</strong>：已從 Sapporo Factory 遷至 <strong>4PLA 1F+2F</strong>（大通南1西4，2025/4）<br>
+      • <strong>GOLDWIN</strong>：新開於 <strong>4PLA 2F</strong>（北海道初出店，2025/8）<br>
+      • <strong>Stüssy</strong>：不在 PARCO，獨立旗艦店 <strong>SAPPORO CHAPTER</strong>（南2西3，2024/1開）<br>
+      • <strong>HUMAN MADE</strong>：在 <strong>THE KNOT SAPPORO 1F</strong>（南3西3），非 PARCO 內<br>
+      • <strong>KAPITAL</strong>：週二公休 ｜ <strong>WAREHOUSE</strong>：週四公休（8/22 週六均 OK）
+    </div>
+  </div>
+
+  <div class="section-title">📍 STELLAR PLACE（JR 札幌站直結）</div>
+  <div class="note-body" style="margin-bottom:4px;color:#d97706;font-weight:600;font-size:12px;">⚠️ 2026/4/1 起 20:00 打烊</div>
+  <div style="overflow-x:auto;margin-bottom:20px;">
+    <table class="transport-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="background:#1a1f2e;color:#fff;"><th style="padding:8px 10px;text-align:left;">品牌</th><th style="padding:8px 10px;text-align:left;">風格</th><th style="padding:8px 10px;text-align:left;">位置</th><th style="padding:8px 10px;text-align:center;">地圖</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">BEAMS</td><td style="padding:8px 10px;color:#718096;">日系選品</td><td style="padding:8px 10px;color:#718096;">EAST B1F</td><td style="padding:8px 10px;text-align:center;"><a href="https://map.yahoo.co.jp/v3/place/Bw5w5kTYd76" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">UNITED ARROWS GLR</td><td style="padding:8px 10px;color:#718096;">輕熟休閒</td><td style="padding:8px 10px;color:#718096;">EAST B1F</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0685477,141.3505853" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">FREAK'S STORE</td><td style="padding:8px 10px;color:#718096;">美式休閒</td><td style="padding:8px 10px;color:#718096;">CENTER 2F</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0683,141.3507" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">SOPH.</td><td style="padding:8px 10px;color:#718096;">SOPHNET. / uniform experiment</td><td style="padding:8px 10px;color:#718096;">CENTER 2F</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0683,141.3507" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">HYSTERIC GLAMOUR</td><td style="padding:8px 10px;color:#718096;">搖滾視覺</td><td style="padding:8px 10px;color:#718096;">CENTER 3F</td><td style="padding:8px 10px;text-align:center;"><a href="https://map.yahoo.co.jp/v3/place/nzTtke6D2Ps" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">Bshop</td><td style="padding:8px 10px;color:#718096;">歐美精選</td><td style="padding:8px 10px;color:#718096;">STELLAR PLACE</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0685477,141.3505853" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">Birkenstock</td><td style="padding:8px 10px;color:#718096;">德國機能鞋</td><td style="padding:8px 10px;color:#718096;">CENTER 3F</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0683,141.3507" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">JOHNBULL</td><td style="padding:8px 10px;color:#718096;">工裝丹寧</td><td style="padding:8px 10px;color:#718096;">STELLAR PLACE</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0685477,141.3505853" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">SORA</td><td style="padding:8px 10px;color:#718096;">機能／戶外</td><td style="padding:8px 10px;color:#718096;">CENTER 3F</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0683,141.3507" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">atmos</td><td style="padding:8px 10px;color:#718096;">球鞋選品</td><td style="padding:8px 10px;color:#718096;">CENTER 3F</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0683,141.3507" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">The North Face+</td><td style="padding:8px 10px;color:#718096;">戶外機能精選</td><td style="padding:8px 10px;color:#718096;">STELLAR PLACE</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0685477,141.3505853" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">JOURNAL STANDARD relume</td><td style="padding:8px 10px;color:#718096;">歐美休閒</td><td style="padding:8px 10px;color:#718096;">EAST 3F</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0685477,141.3505853" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">URBAN RESEARCH DOORS</td><td style="padding:8px 10px;color:#718096;">生活選品</td><td style="padding:8px 10px;color:#718096;">STELLAR PLACE</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0685477,141.3505853" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">nano universe</td><td style="padding:8px 10px;color:#718096;">日系時尚</td><td style="padding:8px 10px;color:#718096;">4F</td><td style="padding:8px 10px;text-align:center;"><a href="https://www.google.com/maps/search/nano+universe+札幌" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">Carhartt WIP</td><td style="padding:8px 10px;color:#718096;">工裝街頭</td><td style="padding:8px 10px;color:#718096;">CENTER 5F</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0683,141.3507" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">HUF</td><td style="padding:8px 10px;color:#718096;">滑板街頭</td><td style="padding:8px 10px;color:#718096;">CENTER 5F</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0683,141.3507" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">📍 PARCO 百貨 + 大通市區（地鐵大通站）</div>
+  <div style="overflow-x:auto;margin-bottom:20px;">
+    <table class="transport-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="background:#1a1f2e;color:#fff;"><th style="padding:8px 10px;text-align:left;">品牌</th><th style="padding:8px 10px;text-align:left;">風格</th><th style="padding:8px 10px;text-align:left;">位置</th><th style="padding:8px 10px;text-align:center;">地圖</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">COMME des GARÇONS<br><span style="font-weight:400;font-size:11px;">/ JUNYA WATANABE</span></td><td style="padding:8px 10px;color:#718096;">設計師／解構</td><td style="padding:8px 10px;color:#718096;">PARCO 1F</td><td style="padding:8px 10px;text-align:center;"><a href="https://map.yahoo.co.jp/v3/place/BWiMOf9vQnM" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">POTR（吉田カバン）</td><td style="padding:8px 10px;color:#718096;">包款選品</td><td style="padding:8px 10px;color:#718096;">PARCO 1F</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0604,141.3567" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">BAO BAO ISSEY MIYAKE</td><td style="padding:8px 10px;color:#718096;">三宅一生包款</td><td style="padding:8px 10px;color:#718096;">PARCO 1F</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0604,141.3567" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">UNITED ARROWS</td><td style="padding:8px 10px;color:#718096;">輕熟男女裝</td><td style="padding:8px 10px;color:#718096;">PARCO</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0604,141.3567" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">JOURNAL STANDARD MEN</td><td style="padding:8px 10px;color:#718096;">男裝主力</td><td style="padding:8px 10px;color:#718096;">PARCO 2F</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0604,141.3567" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">THE GALLERY BOX</td><td style="padding:8px 10px;color:#718096;">精選單品</td><td style="padding:8px 10px;color:#718096;">PARCO 2F（週六20:30）</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0604,141.3567" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">Stüssy SAPPORO CHAPTER</td><td style="padding:8px 10px;color:#718096;">衝浪街頭經典</td><td style="padding:8px 10px;color:#718096;"><strong style="color:#d97706;">獨立旗艦</strong> 南2西3 11:00–20:00</td><td style="padding:8px 10px;text-align:center;"><a href="https://www.google.com/maps/search/Stussy+Sapporo+Chapter" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">BILLY'S ENT</td><td style="padding:8px 10px;color:#718096;">球鞋選品</td><td style="padding:8px 10px;color:#718096;">南3西2 エルムビル 11:00–20:00</td><td style="padding:8px 10px;text-align:center;"><a href="https://www.google.com/maps/search/BILLY'S+ENT+Sapporo" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">HUMAN MADE</td><td style="padding:8px 10px;color:#718096;">NIGO 潮牌</td><td style="padding:8px 10px;color:#718096;"><strong style="color:#d97706;">THE KNOT SAPPORO 1F</strong> 南3西3 11:00–19:00</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0608,141.3534" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">KAPITAL</td><td style="padding:8px 10px;color:#718096;">日本工藝丹寧</td><td style="padding:8px 10px;color:#718096;">南2西1 壱丁目ビル <strong style="color:#e63946;">週二休</strong></td><td style="padding:8px 10px;text-align:center;"><a href="https://www.google.com/maps/search/KAPITAL+札幌" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">📍 4PLA（大通南1西4，2025年新館）</div>
+  <div class="note-body" style="margin-bottom:8px;color:#16a34a;font-weight:600;font-size:12px;">影片拍攝後才開的新商場，強烈推薦</div>
+  <div style="overflow-x:auto;margin-bottom:20px;">
+    <table class="transport-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="background:#1a1f2e;color:#fff;"><th style="padding:8px 10px;text-align:left;">品牌</th><th style="padding:8px 10px;text-align:left;">備註</th><th style="padding:8px 10px;text-align:left;">位置</th><th style="padding:8px 10px;text-align:center;">地圖</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">ARC'TERYX</td><td style="padding:8px 10px;color:#718096;">含 ReBIRD 修繕服務，2025/4 遷入</td><td style="padding:8px 10px;color:#718096;">1F+2F 11:00–20:00</td><td style="padding:8px 10px;text-align:center;"><a href="https://www.google.com/maps/search/ARC'TERYX+4PLA+札幌" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">GOLDWIN</td><td style="padding:8px 10px;color:#718096;">北海道初出店，2025/8 開業</td><td style="padding:8px 10px;color:#718096;">2F 11:00–20:00</td><td style="padding:8px 10px;text-align:center;"><a href="https://www.google.com/maps/search/GOLDWIN+4PLA+札幌" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">RAGTAG</td><td style="padding:8px 10px;color:#718096;">品牌古著，北海道初出店，2025/10 開業</td><td style="padding:8px 10px;color:#718096;">3F</td><td style="padding:8px 10px;text-align:center;">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">📍 Sapporo Factory（戶外裝備集中地）</div>
+  <div style="overflow-x:auto;margin-bottom:20px;">
+    <table class="transport-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="background:#1a1f2e;color:#fff;"><th style="padding:8px 10px;text-align:left;">品牌</th><th style="padding:8px 10px;text-align:left;">風格</th><th style="padding:8px 10px;text-align:center;">地圖</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">SnowPeak</td><td style="padding:8px 10px;color:#718096;">露營精品</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0651,141.3617" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">Montbell</td><td style="padding:8px 10px;color:#718096;">日本平價機能</td><td style="padding:8px 10px;text-align:center;"><a href="https://maps.google.com/maps?q=43.0651,141.3617" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">SALOMON</td><td style="padding:8px 10px;color:#718096;">越野跑山</td><td style="padding:8px 10px;text-align:center;">—</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">DESCENTE</td><td style="padding:8px 10px;color:#718096;">滑雪運動</td><td style="padding:8px 10px;text-align:center;">—</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">Oakley</td><td style="padding:8px 10px;color:#718096;">運動太陽眼鏡</td><td style="padding:8px 10px;text-align:center;">—</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">A&amp;F Country</td><td style="padding:8px 10px;color:#718096;">美式戶外</td><td style="padding:8px 10px;text-align:center;">—</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">好日山荘</td><td style="padding:8px 10px;color:#718096;">登山綜合選品</td><td style="padding:8px 10px;text-align:center;">—</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">Ogawa</td><td style="padding:8px 10px;color:#718096;">帳篷露營</td><td style="padding:8px 10px;text-align:center;">—</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">SORA（Factory店）</td><td style="padding:8px 10px;color:#718096;">機能戶外</td><td style="padding:8px 10px;text-align:center;">—</td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">The North Face</td><td style="padding:8px 10px;color:#718096;">戶外機能</td><td style="padding:8px 10px;text-align:center;">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">📍 獨立潮店（散落市區）</div>
+  <div style="overflow-x:auto;margin-bottom:20px;">
+    <table class="transport-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="background:#1a1f2e;color:#fff;"><th style="padding:8px 10px;text-align:left;">品牌</th><th style="padding:8px 10px;text-align:left;">風格</th><th style="padding:8px 10px;text-align:left;">地址 / 時間</th><th style="padding:8px 10px;text-align:center;">地圖</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">South2 West8</td><td style="padding:8px 10px;color:#718096;">戶外×街頭（品牌發源地）</td><td style="padding:8px 10px;color:#718096;">南2西8-2-1 11:30–20:00</td><td style="padding:8px 10px;text-align:center;"><a href="https://www.google.com/maps/search/South2+West8+Sapporo" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">WAREHOUSE</td><td style="padding:8px 10px;color:#718096;">美式復古丹寧</td><td style="padding:8px 10px;color:#718096;"><strong style="color:#e63946;">週四休</strong></td><td style="padding:8px 10px;text-align:center;"><a href="https://www.google.com/maps/search/WARE+HOUSE+札幌" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">BLUE BLUE</td><td style="padding:8px 10px;color:#718096;">日本復古藍染</td><td style="padding:8px 10px;color:#718096;">南2西1-17-4</td><td style="padding:8px 10px;text-align:center;"><a href="https://map.yahoo.co.jp/v3/place/6AGSbKq7iQ6" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;"><td style="padding:8px 10px;font-weight:600;">JAM（古著）</td><td style="padding:8px 10px;color:#718096;">古著選品</td><td style="padding:8px 10px;color:#718096;">薄野步行 9 分</td><td style="padding:8px 10px;text-align:center;"><a href="https://www.google.com/maps/search/JAM+古着+札幌大通" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 10px;font-weight:600;">BAPE STORE</td><td style="padding:8px 10px;color:#718096;">街頭潮牌</td><td style="padding:8px 10px;color:#718096;">大通西1-14-2</td><td style="padding:8px 10px;text-align:center;"><a href="https://www.google.com/maps/search/BAPE+STORE+Sapporo" target="_blank" style="color:#3b82f6;">📍</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">💄 化妝品 &amp; 美妝</div>
+  <div style="overflow-x:auto;margin-bottom:20px;">
+    <table class="transport-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="background:#1a1f2e;color:#fff;">
+        <th style="padding:8px 10px;text-align:left;">品牌</th>
+        <th style="padding:8px 10px;text-align:left;">風格 / 特色</th>
+        <th style="padding:8px 10px;text-align:left;">地址 / 時間</th>
+        <th style="padding:8px 10px;text-align:center;">地圖</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:8px 10px;font-weight:600;">shiro</td>
+          <td style="padding:8px 10px;color:#718096;">日本天然美妝，北海道發源品牌</td>
+          <td style="padding:8px 10px;color:#718096;">—</td>
+          <td style="padding:8px 10px;text-align:center;"><a href="https://maps.app.goo.gl/s47BmiqYZoCW1GzQ6" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+<div class="content panel" id="panel-food">
+  <div class="section-title">☕ 咖啡</div>
+  <div style="overflow-x:auto;margin-bottom:20px;">
+    <table class="transport-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="background:#1a1f2e;color:#fff;">
+        <th style="padding:10px 12px;text-align:left;">店名</th>
+        <th style="padding:10px 12px;text-align:left;">特色</th>
+        <th style="padding:10px 12px;text-align:left;">地址 / 時間</th>
+        <th style="padding:10px 12px;text-align:center;">地圖</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">森彦 MORIHICO<br><span style="font-size:11px;color:#718096;font-weight:400;">本店（円山）</span></td>
+          <td style="padding:10px 12px;color:#4a5568;">1996年創業昭和古民家改建，本店限定「森の雫」深焙必點</td>
+          <td style="padding:10px 12px;color:#718096;">南2西26丁目｜⏰ 9:00–20:00｜円山公園站④出口步行4分</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/place/森彦/@43.0533134,141.3186102,17z" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">Brew it by NODE<br><span style="font-size:11px;color:#718096;font-weight:400;">狸小路</span></td>
+          <td style="padding:10px 12px;color:#4a5568;">Q Arabica Grader 認證，競標豆、藝妓常態供應，すすきの旁最方便</td>
+          <td style="padding:10px 12px;color:#718096;">南3西3丁目｜⏰ 9:00–18:00（日12:00–）｜定休：木曜｜すすきの站1號出口即到</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://goo.gl/maps/5FzKqVdJR4y9Gh4s9" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">BARISTART COFFEE<br><span style="font-size:11px;color:#718096;font-weight:400;">大通</span></td>
+          <td style="padding:10px 12px;color:#4a5568;">希少ジャージー牛乳拿鐵，可自選豆子×牛奶客製組合</td>
+          <td style="padding:10px 12px;color:#718096;">南1西4丁目｜⏰ 10:00–18:00｜大通站10號出口步行3分</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://goo.gl/maps/L5H9pM1GP9cNHpMv5" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">🍜 美食</div>
+  <div style="overflow-x:auto;margin-bottom:20px;">
+    <table class="transport-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="background:#1a1f2e;color:#fff;">
+        <th style="padding:10px 12px;text-align:left;">店名</th>
+        <th style="padding:10px 12px;text-align:left;">分類</th>
+        <th style="padding:10px 12px;text-align:left;">特色</th>
+        <th style="padding:10px 12px;text-align:center;">地圖</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">はちきょう</td>
+          <td style="padding:10px 12px;color:#718096;">海鮮丼</td>
+          <td style="padding:10px 12px;color:#4a5568;">こぼれいくら丼，鮭魚卵滿到溢出來的名物，球場グルメ必吃</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/はちきょう+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">十勝豚丼 いっぴん</td>
+          <td style="padding:10px 12px;color:#718096;">豚丼</td>
+          <td style="padding:10px 12px;color:#4a5568;">十勝名物豚丼，炭火香氣濃郁</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/十勝豚丼いっぴん+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">SOUP CURRY TREASURE</td>
+          <td style="padding:10px 12px;color:#718096;">湯咖哩</td>
+          <td style="padding:10px 12px;color:#4a5568;">北海道湯咖哩代表，湯底濃郁香料層次豐富</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/SOUP+CURRY+TREASURE+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">回転寿司 根室花まる</td>
+          <td style="padding:10px 12px;color:#718096;">迴轉壽司</td>
+          <td style="padding:10px 12px;color:#4a5568;">北海道在地鮮魚，CP值極高，常大排長龍</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/根室花まる+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">迴轉壽司 トリトン</td>
+          <td style="padding:10px 12px;color:#718096;">迴轉壽司</td>
+          <td style="padding:10px 12px;color:#4a5568;">道産魚貝類直送，生筋子、毛蟹等稀有食材</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/回転寿司トリトン+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">二條市場 大磯</td>
+          <td style="padding:10px 12px;color:#718096;">海鮮丼</td>
+          <td style="padding:10px 12px;color:#4a5568;">二條市場百年老店，早市鮮魚海鮮丼</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/二条市場+大磯+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">北菓樓</td>
+          <td style="padding:10px 12px;color:#718096;">甜點伴手禮</td>
+          <td style="padding:10px 12px;color:#4a5568;">北海道代表性菓子品牌，夢不思議、巴麥大地等必買</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/北菓楼+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">Majisand</td>
+          <td style="padding:10px 12px;color:#718096;">水果三明治</td>
+          <td style="padding:10px 12px;color:#4a5568;">狸小路商店街，北海道水果夾心三明治，外酥內嫩</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/Majisand+札幌+狸小路" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">積丹 生海膽</td>
+          <td style="padding:10px 12px;color:#718096;">海膽丼</td>
+          <td style="padding:10px 12px;color:#4a5568;">8月產季尾聲，積丹半島在地食堂限定，¥3,000–5,000/碗</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/積丹+生雲丹+食堂" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title" style="margin-top:24px;">🍺 酒吧</div>
+  <div style="overflow-x:auto;margin-bottom:20px;">
+    <table class="transport-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="background:#1a1f2e;color:#fff;">
+        <th style="padding:10px 12px;text-align:left;">店名</th>
+        <th style="padding:10px 12px;text-align:left;">類型</th>
+        <th style="padding:10px 12px;text-align:left;">特色</th>
+        <th style="padding:10px 12px;text-align:center;">地圖</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">Bar Yamazaki<br><span style="font-size:11px;color:#718096;font-weight:400;">すすきの</span></td>
+          <td style="padding:10px 12px;color:#718096;">威士忌</td>
+          <td style="padding:10px 12px;color:#4a5568;">札幌老牌 Bar，Nikka / 余市等北海道威士忌品項豐富，老派日式 Bar 氛圍</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/Bar+Yamazaki+札幌+すすきの" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">Bar MONDE<br><span style="font-size:11px;color:#718096;font-weight:400;">すすきの</span></td>
+          <td style="padding:10px 12px;color:#718096;">調酒</td>
+          <td style="padding:10px 12px;color:#4a5568;">薄野深夜也開，調酒師手藝穩，適合喝到很晚</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/Bar+MONDE+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">Bar 北緯43度<br><span style="font-size:11px;color:#718096;font-weight:400;">すすきの</span></td>
+          <td style="padding:10px 12px;color:#718096;">威士忌</td>
+          <td style="padding:10px 12px;color:#4a5568;">主打北海道在地烈酒，余市蒸溜所帰りに寄りたい一軒</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/Bar+北緯43度+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">Brue Brewing<br><span style="font-size:11px;color:#718096;font-weight:400;">狸小路</span></td>
+          <td style="padding:10px 12px;color:#718096;">精釀啤酒</td>
+          <td style="padding:10px 12px;color:#4a5568;">狸小路旁自家釀製，可內用也可外帶，種類豐富</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/Brue+Brewing+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">CRAFT BEER MARKET<br><span style="font-size:11px;color:#718096;font-weight:400;">大通</span></td>
+          <td style="padding:10px 12px;color:#718096;">精釀啤酒</td>
+          <td style="padding:10px 12px;color:#4a5568;">國內外精釀選項 30+ 種，下午就可以喝，站立 & 坐位皆有</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/CRAFT+BEER+MARKET+札幌大通" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">Half Time<br><span style="font-size:11px;color:#718096;font-weight:400;">すすきの</span></td>
+          <td style="padding:10px 12px;color:#718096;">精釀 / 運動酒吧</td>
+          <td style="padding:10px 12px;color:#4a5568;">球賽日看實況最佳，觀看火腿 or MLB 邊喝邊看超合適</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/Half+Time+bar+Sapporo+すすきの" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">ポールスタア<br><span style="font-size:11px;color:#718096;font-weight:400;">すすきの</span></td>
+          <td style="padding:10px 12px;color:#718096;">調酒 / 老舖</td>
+          <td style="padding:10px 12px;color:#4a5568;">1966年創業，札幌最老牌 Bar 之一，經典雞尾酒不踩雷</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/ポールスタア+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+          <td style="padding:10px 12px;font-weight:600;">酒と銀 seis<br><span style="font-size:11px;color:#718096;font-weight:400;">狸小路</span></td>
+          <td style="padding:10px 12px;color:#718096;">日本酒</td>
+          <td style="padding:10px 12px;color:#4a5568;">日本酒立飲 + 購買，北海道在地酒藏選品，行程 Day 1 晚已安排</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/酒と銀+seis+狸小路+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:10px 12px;font-weight:600;">サッポロビール園<br><span style="font-size:11px;color:#718096;font-weight:400;">北13条東</span></td>
+          <td style="padding:10px 12px;color:#718096;">札幌啤酒 / 成吉思汗</td>
+          <td style="padding:10px 12px;color:#4a5568;">原廠直售，現烤成吉思汗 + 生啤酒，老建築氛圍，觀光必訪</td>
+          <td style="padding:10px 12px;text-align:center;"><a href="https://www.google.com/maps/search/サッポロビール園+札幌" target="_blank" style="color:#3b82f6;">📍</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="content panel" id="panel-stay">
+
+  <div class="section-title">🏠 住宿（已確認）</div>
+
+  <div class="note-card success">
+    <div class="note-title">✅ Airbnb 整棟公寓 — 已訂</div>
+    <div class="note-body">
+      🗺 <a href="https://maps.app.goo.gl/hCQT8iMzhsFrxQHW8" target="_blank" style="color:#3b82f6;">Google Maps 位置</a>　｜　
+      <a href="https://www.airbnb.com.tw/rooms/1635331425290185956?adults=1&children=0&infants=0&pets=0&wishlist_item_id=11006523626056&check_in=2026-08-18&check_out=2026-08-22&source_impression_id=p3_1783155664_P3Filh9S8TUMVVxJ&previous_page_section_name=1000" target="_blank" style="color:#16a34a;font-weight:700;">Airbnb 訂單頁面</a><br><br>
+      💳 刷卡金額：<strong style="color:#1a1f2e;">NT$26,718</strong>（4晚合計，均攤 <strong>NT$6,680/人</strong>）<br>
+      🕒 入住：<strong>8/18（二）15:00</strong>　｜　退房：<strong>8/22（六）10:00</strong><br>
+      • 4人整棟公寓，有廚房可放伴手禮冰鮮品<br>
+      • ⚠ 請保管好門鎖資訊，確認聯絡房東 LINE / 電話
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:24px;">⚾ 球場交通詳細（8/19 適用）</div>
+
+</div>
+
 <div class="content panel" id="panel-notes">
 
   <div class="note-card danger">
@@ -825,33 +1118,6 @@
     </table>
   </div>
 
-  <div class="section-title">🍜 猿哥認證美食 6 家</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
-    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;">
-      <div style="font-weight:700;font-size:13px;margin-bottom:4px;">十勝豚丼 いっぴん</div>
-      <div style="font-size:12px;color:#718096;">豚丼</div>
-    </div>
-    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;">
-      <div style="font-weight:700;font-size:13px;margin-bottom:4px;">回転寿司 根室花まる</div>
-      <div style="font-size:12px;color:#718096;">迴轉壽司</div>
-    </div>
-    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;">
-      <div style="font-weight:700;font-size:13px;margin-bottom:4px;">SOUP CURRY TREASURE</div>
-      <div style="font-size:12px;color:#718096;">湯咖哩</div>
-    </div>
-    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;">
-      <div style="font-weight:700;font-size:13px;margin-bottom:4px;">北菓樓</div>
-      <div style="font-size:12px;color:#718096;">甜點伴手禮</div>
-    </div>
-    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;">
-      <div style="font-weight:700;font-size:13px;margin-bottom:4px;">二條市場 大磯</div>
-      <div style="font-size:12px;color:#718096;">海鮮丼</div>
-    </div>
-    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;">
-      <div style="font-weight:700;font-size:13px;margin-bottom:4px;">迴轉壽司 トリトン</div>
-      <div style="font-size:12px;color:#718096;">迴轉壽司</div>
-    </div>
-  </div>
 
 </div>
 
