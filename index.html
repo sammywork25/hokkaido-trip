@@ -123,6 +123,72 @@
   .note-title { font-size: 13px; font-weight: 700; color: #1a1f2e; margin-bottom: 6px; }
   .note-body { font-size: 12px; color: #718096; line-height: 1.9; }
   .note-body strong { color: #4a5568; }
+
+  /* ── Ledger Panel ─────────────────────────────────────────── */
+  .l-rate-bar { background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:9px 13px; display:flex; align-items:center; gap:9px; font-size:13px; flex-wrap:wrap; margin-bottom:13px; }
+  .l-rate-input { border:1px solid #cbd5e0; border-radius:6px; padding:4px 7px; font-size:13px; width:62px; text-align:right; }
+  .l-rate-badge { background:#ebf8ff; color:#2b6cb0; border-radius:12px; padding:2px 9px; font-size:12px; font-weight:600; }
+  .l-rate-btn { background:none; border:1px solid #bee3f8; color:#2b6cb0; border-radius:6px; padding:2px 9px; font-size:12px; cursor:pointer; }
+  .l-sync { display:inline-flex; align-items:center; gap:5px; border-radius:20px; padding:3px 9px; font-size:11px; font-weight:600; margin-left:auto; }
+  .l-sync.ok  { background:#f0fff4; border:1px solid #9ae6b4; color:#276749; }
+  .l-sync.bad { background:#fff5f5; border:1px solid #fc8181; color:#c53030; }
+  .l-sync.ing { background:#fefce8; border:1px solid #fbd38d; color:#92400e; }
+  .l-sync-dot { width:6px; height:6px; border-radius:50%; background:currentColor; }
+  @keyframes lpulse { 0%,100%{opacity:1}50%{opacity:.3} }
+  .l-sync.ing .l-sync-dot { animation:lpulse 1s infinite; }
+  .l-add-card { background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:13px; margin-bottom:13px; }
+  .l-add-card h3 { font-size:13px; font-weight:700; color:#2d3748; margin-bottom:10px; }
+  .l-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .l-full { grid-column:1/-1; }
+  .l-field label { display:block; font-size:10px; font-weight:700; color:#718096; text-transform:uppercase; letter-spacing:.4px; margin-bottom:3px; }
+  .l-field input, .l-field select { width:100%; border:1.5px solid #e2e8f0; border-radius:7px; padding:7px 9px; font-size:13px; background:white; }
+  .l-field input:focus, .l-field select:focus { outline:none; border-color:#3b82f6; }
+  .l-amt-row { display:flex; gap:6px; }
+  .l-amt-row input { flex:1; }
+  .l-amt-row select { width:76px; flex-shrink:0; }
+  .l-conv { font-size:11px; color:#38a169; margin-top:3px; min-height:14px; }
+  .l-chips { display:flex; gap:5px; flex-wrap:wrap; }
+  .l-chip { padding:5px 11px; border-radius:20px; font-size:12px; cursor:pointer; user-select:none; transition:all .15s; border:1.5px solid transparent; }
+  .lc-s.selected{background:#3182ce;color:#fff;font-weight:700;} .lc-s:not(.selected){background:#ebf8ff;border-color:#bee3f8;color:#2b6cb0;}
+  .lc-a.selected{background:#d53f8c;color:#fff;font-weight:700;} .lc-a:not(.selected){background:#fff0f6;border-color:#fbb6ce;color:#b83280;}
+  .lc-y.selected{background:#38a169;color:#fff;font-weight:700;} .lc-y:not(.selected){background:#f0fff4;border-color:#9ae6b4;color:#276749;}
+  .lc-b.selected{background:#ed8936;color:#fff;font-weight:700;} .lc-b:not(.selected){background:#fffaf0;border-color:#fbd38d;color:#c05621;}
+  .l-submit { width:100%; padding:10px; background:#1a1f2e; color:white; border:none; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; margin-top:9px; }
+  .l-submit:hover { background:#2d3652; }
+  .l-submit:disabled { background:#a0aec0; cursor:not-allowed; }
+  .l-summary { background:white; border:1px solid #e2e8f0; border-radius:10px; padding:13px; margin-bottom:13px; }
+  .l-summary h3 { font-size:13px; font-weight:700; color:#2d3748; margin-bottom:9px; }
+  .l-pb { display:flex; align-items:center; justify-content:space-between; padding:7px 0; border-bottom:1px solid #f7fafc; }
+  .l-pb:last-child { border-bottom:none; }
+  .l-pb-name { display:flex; align-items:center; gap:7px; font-size:13px; font-weight:600; }
+  .l-pb-dot { width:9px; height:9px; border-radius:50%; }
+  .ld-s{background:#3182ce;} .ld-a{background:#d53f8c;} .ld-y{background:#38a169;} .ld-b{background:#ed8936;}
+  .l-pb-right { text-align:right; }
+  .l-pb-amt { font-size:14px; font-weight:700; }
+  .l-pos{color:#276749;} .l-neg{color:#c53030;} .l-zer{color:#718096;}
+  .l-pb-sub { font-size:10px; color:#a0aec0; margin-top:1px; }
+  .l-settle { margin-top:9px; background:#f7fafc; border-radius:8px; padding:10px; }
+  .l-settle h4 { font-size:10px; font-weight:700; color:#718096; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+  .l-si { font-size:12px; color:#4a5568; padding:3px 0; display:flex; align-items:center; gap:4px; }
+  .l-si-amt { font-weight:700; color:#1a1f2e; margin-left:auto; }
+  .l-total { display:flex; justify-content:space-between; padding:7px 0 0; border-top:1px solid #e2e8f0; margin-top:4px; font-size:13px; color:#718096; }
+  .l-total strong { color:#1a1f2e; font-size:14px; }
+  .l-list h3 { font-size:13px; font-weight:700; color:#2d3748; margin-bottom:9px; }
+  .l-item { background:white; border:1px solid #e2e8f0; border-radius:10px; padding:11px 12px; margin-bottom:6px; display:flex; gap:9px; }
+  .l-item-body { flex:1; min-width:0; }
+  .l-item-title { font-size:13px; font-weight:600; color:#1a1f2e; }
+  .l-item-meta { font-size:11px; color:#718096; margin-top:1px; }
+  .l-item-chips { display:flex; flex-wrap:wrap; gap:3px; margin-top:4px; }
+  .l-ichip { font-size:10px; padding:2px 7px; border-radius:9px; font-weight:500; }
+  .l-isplit { background:#f7fafc; color:#718096; border:1px solid #e2e8f0; }
+  .l-item-right { text-align:right; flex-shrink:0; }
+  .l-item-amt { font-size:14px; font-weight:700; color:#1a1f2e; }
+  .l-item-orig { font-size:10px; color:#a0aec0; margin-top:1px; }
+  .l-del { background:none; border:none; color:#cbd5e0; cursor:pointer; font-size:13px; padding:2px 3px; margin-top:3px; display:block; transition:color .15s; }
+  .l-del:hover { color:#fc8181; }
+  .l-daylabel { font-size:10px; font-weight:700; color:#a0aec0; text-transform:uppercase; letter-spacing:1px; padding:5px 0 3px; }
+  .l-empty { text-align:center; padding:24px; color:#a0aec0; font-size:13px; }
+  @media (max-width:500px) { .l-grid{grid-template-columns:1fr;} .l-full{grid-column:1;} }
 </style>
 </head>
 <body>
@@ -1037,94 +1103,322 @@ or 改去 <strong>北海道神宮</strong>（円山公園駅，地下鉄10分）
 </div>
 
 <div class="content panel" id="panel-ledger">
-  <div class="section-title">💰 實際支出記帳</div>
-  <div style="overflow-x:auto;">
-    <table style="width:100%;border-collapse:collapse;font-size:14px;">
-      <thead>
-        <tr style="background:#1a1f2e;color:#fff;">
-          <th style="padding:10px 12px;text-align:left;">項目</th>
-          <th style="padding:10px 12px;text-align:right;">金額（NT$）</th>
-          <th style="padding:10px 12px;text-align:center;">人均</th>
-          <th style="padding:10px 12px;text-align:center;">付款人</th>
-          <th style="padding:10px 12px;text-align:center;">狀態</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="border-bottom:1px solid #e2e8f0;">
-          <td style="padding:10px 12px;">⚾ 棒球票（4人）</td>
-          <td style="padding:10px 12px;text-align:right;font-weight:600;">6,126</td>
-          <td style="padding:10px 12px;text-align:center;color:#718096;">1,532/人</td>
-          <td style="padding:10px 12px;text-align:center;"><span style="background:#dbeafe;color:#1e40af;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600;">Sam</span></td>
-          <td style="padding:10px 12px;text-align:center;"><span style="background:#dcfce7;color:#166534;padding:2px 8px;border-radius:10px;font-size:12px;">✓ 已付</span></td>
-        </tr>
-        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
-          <td style="padding:10px 12px;">🏠 Airbnb 住宿 4晚（整棟）</td>
-          <td style="padding:10px 12px;text-align:right;font-weight:600;">26,718</td>
-          <td style="padding:10px 12px;text-align:center;color:#718096;">6,680/人</td>
-          <td style="padding:10px 12px;text-align:center;"><span style="background:#dbeafe;color:#1e40af;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600;">Sam</span></td>
-          <td style="padding:10px 12px;text-align:center;"><span style="background:#dcfce7;color:#166534;padding:2px 8px;border-radius:10px;font-size:12px;">✓ 已付</span></td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr style="background:#f8fafc;">
-          <td style="padding:10px 12px;font-weight:700;">合計</td>
-          <td style="padding:10px 12px;text-align:right;font-weight:700;color:#2563eb;">32,844</td>
-          <td style="padding:10px 12px;text-align:center;color:#718096;font-size:12px;">8,211/人</td>
-          <td colspan="2" style="padding:10px 12px;text-align:center;color:#718096;font-size:12px;">Sam 先墊付，其他人回補</td>
-        </tr>
-      </tfoot>
-    </table>
+  <div class="section-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+    💰 實際支出記帳
+    <span class="l-sync ing" id="lSyncBadge"><span class="l-sync-dot"></span><span id="lSyncText">連線中</span></span>
   </div>
 
-  <div style="margin-top:16px;">
-    <div style="font-size:13px;font-weight:700;color:#1a1f2e;margin-bottom:8px;">💸 回補紀錄</div>
-    <table style="width:100%;border-collapse:collapse;font-size:14px;">
-      <thead>
-        <tr style="background:#f1f5f9;color:#475569;font-size:12px;">
-          <th style="padding:8px 12px;text-align:left;font-weight:600;">同行人</th>
-          <th style="padding:8px 12px;text-align:right;font-weight:600;">應付 Sam（NT$）</th>
-          <th style="padding:8px 12px;text-align:center;font-weight:600;">狀態</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="border-bottom:1px solid #e2e8f0;">
-          <td style="padding:10px 12px;font-weight:600;">Amber</td>
-          <td style="padding:10px 12px;text-align:right;">8,211</td>
-          <td style="padding:10px 12px;text-align:center;"><span style="background:#dcfce7;color:#166534;padding:3px 10px;border-radius:10px;font-size:12px;font-weight:600;">✅ 已還款</span></td>
-        </tr>
-        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
-          <td style="padding:10px 12px;font-weight:600;">宇頡</td>
-          <td style="padding:10px 12px;text-align:right;">8,211</td>
-          <td style="padding:10px 12px;text-align:center;"><span style="background:#dcfce7;color:#166534;padding:3px 10px;border-radius:10px;font-size:12px;font-weight:600;">✅ 已還款</span></td>
-        </tr>
-        <tr style="border-bottom:1px solid #e2e8f0;">
-          <td style="padding:10px 12px;font-weight:600;">Benben</td>
-          <td style="padding:10px 12px;text-align:right;">8,211</td>
-          <td style="padding:10px 12px;text-align:center;"><span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:10px;font-size:12px;font-weight:600;">⏳ 待還款</span></td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr style="background:#eff6ff;">
-          <td style="padding:10px 12px;font-weight:700;color:#1e40af;">Sam 已收回</td>
-          <td style="padding:10px 12px;text-align:right;font-weight:700;color:#1e40af;">16,422</td>
-          <td style="padding:10px 12px;text-align:center;font-size:12px;color:#475569;">尚待回收 NT$8,211</td>
-        </tr>
-      </tfoot>
-    </table>
+  <!-- 匯率列 -->
+  <div class="l-rate-bar">
+    <label style="color:#718096;">¥1 JPY =</label>
+    <input type="number" class="l-rate-input" id="lRateInput" value="0.215" step="0.001" min="0.1" max="1">
+    <label style="color:#718096;">TWD</label>
+    <span class="l-rate-badge" id="lRateBadge">¥100 ≈ NT$21.5</span>
+    <button class="l-rate-btn" onclick="lFetchRate()">🔄 即時匯率</button>
+    <span id="lRateStatus" style="font-size:11px;color:#718096;"></span>
   </div>
 
-  <div style="margin-top:12px;padding:10px 14px;background:#fefce8;border-radius:8px;font-size:12px;color:#92400e;">
-    💡 後續每筆支出告訴我：項目、金額、付款人，我幫你更新表格。如果 Benben 還款了，告訴我一下更新狀態。
+  <!-- 新增費用 -->
+  <div class="l-add-card">
+    <h3>➕ 新增費用</h3>
+    <div class="l-grid">
+      <div class="l-field l-full">
+        <label>費用說明</label>
+        <input type="text" id="lDesc" placeholder="例：積丹 海膽丼">
+      </div>
+      <div class="l-field">
+        <label>金額</label>
+        <div class="l-amt-row">
+          <input type="number" id="lAmount" placeholder="0" min="0" oninput="lUpdateConv()">
+          <select id="lCurrency" onchange="lUpdateConv()">
+            <option value="TWD">NT$</option>
+            <option value="JPY">¥ JPY</option>
+          </select>
+        </div>
+        <div class="l-conv" id="lConv"></div>
+      </div>
+      <div class="l-field">
+        <label>日期</label>
+        <select id="lDay">
+          <option value="行前">行前付款</option>
+          <option value="8/18">8/18 一（Day 1）</option>
+          <option value="8/19">8/19 二（Day 2）</option>
+          <option value="8/20">8/20 三（Day 3）</option>
+          <option value="8/21" selected>8/21 四（Day 4）</option>
+          <option value="8/22">8/22 五（Day 5）</option>
+        </select>
+      </div>
+      <div class="l-field">
+        <label>付款人</label>
+        <select id="lPayer">
+          <option value="Sam">Sam</option>
+          <option value="Amber">Amber</option>
+          <option value="宇頡">宇頡</option>
+          <option value="Benben">Benben</option>
+        </select>
+      </div>
+      <div class="l-field l-full">
+        <label>分攤對象</label>
+        <div class="l-chips" id="lSplitChips">
+          <div class="l-chip lc-s selected" data-p="Sam" onclick="lToggleChip(this)">Sam</div>
+          <div class="l-chip lc-a selected" data-p="Amber" onclick="lToggleChip(this)">Amber</div>
+          <div class="l-chip lc-y selected" data-p="宇頡" onclick="lToggleChip(this)">宇頡</div>
+          <div class="l-chip lc-b selected" data-p="Benben" onclick="lToggleChip(this)">Benben</div>
+        </div>
+      </div>
+    </div>
+    <button class="l-submit" id="lSubmitBtn" onclick="lAddExpense()">記帳</button>
+  </div>
+
+  <!-- 結算總覽 -->
+  <div class="l-summary">
+    <h3>結算總覽</h3>
+    <div id="lBalList"><div class="l-empty">連線中…</div></div>
+    <div id="lTotalRow" class="l-total" style="display:none"></div>
+    <div id="lSettleBlock"></div>
+  </div>
+
+  <!-- 費用明細 -->
+  <div class="l-list">
+    <h3>費用明細</h3>
+    <div id="lExpList"><div class="l-empty">連線中…</div></div>
   </div>
 </div>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
 <script>
+// ── Tab 切換 ───────────────────────────────────────────────────
 function showPanel(name, el) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('panel-' + name).classList.add('active');
   el.classList.add('active');
 }
+
+// ── Firebase 記帳 ──────────────────────────────────────────────
+(function() {
+  const cfg = {
+    apiKey: "AIzaSyD98SaJk0rAB5f3OBHVvPJpi3O1hOmc3YI",
+    authDomain: "hokkaido-trip-cfc8e.firebaseapp.com",
+    databaseURL: "https://hokkaido-trip-cfc8e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "hokkaido-trip-cfc8e",
+    storageBucket: "hokkaido-trip-cfc8e.firebasestorage.app",
+    messagingSenderId: "48495124695",
+    appId: "1:48495124695:web:3b9547834ab3f7cd835092"
+  };
+  firebase.initializeApp(cfg);
+  const db = firebase.database();
+  const ref = db.ref('expenses');
+
+  // 常數
+  const PEOPLE = ['Sam','Amber','宇頡','Benben'];
+  const EMOJI  = {Sam:'🧑‍💻',Amber:'🌸','宇頡':'🍀',Benben:'🐾'};
+  const COLOR  = {Sam:'#3182ce',Amber:'#d53f8c','宇頡':'#38a169',Benben:'#ed8936'};
+  const DOTCLS = {Sam:'ld-s',Amber:'ld-a','宇頡':'ld-y',Benben:'ld-b'};
+
+  let expenses = [];
+  let rate = parseFloat(localStorage.getItem('hk_rate') || '0.215');
+
+  // 匯率初始化
+  const rIn = document.getElementById('lRateInput');
+  if (rIn) {
+    rIn.value = rate;
+    lUpdateBadge();
+    rIn.addEventListener('input', () => {
+      rate = parseFloat(rIn.value) || 0.215;
+      localStorage.setItem('hk_rate', rate);
+      lUpdateBadge(); lUpdateConv(); lRender();
+    });
+  }
+
+  // 連線狀態
+  db.ref('.info/connected').on('value', snap => {
+    const ok = snap.val();
+    const b = document.getElementById('lSyncBadge');
+    const t = document.getElementById('lSyncText');
+    if (!b) return;
+    b.className = 'l-sync ' + (ok ? 'ok' : 'bad');
+    t.textContent = ok ? '即時同步中' : '離線';
+    const btn = document.getElementById('lSubmitBtn');
+    if (btn) btn.disabled = !ok;
+  });
+
+  // 即時監聽
+  ref.on('value', snap => {
+    expenses = [];
+    snap.forEach(c => expenses.push({ id: c.key, ...c.val() }));
+    expenses.sort((a,b) => (a.ts||0)-(b.ts||0));
+    lRender();
+  });
+
+  // 若 DB 空，自動填入行前兩筆
+  ref.once('value', snap => {
+    if (!snap.exists()) {
+      ref.push({ desc:'⚾ 棒球票（4人）',   amount:6126,  currency:'TWD', day:'行前', payer:'Sam', split:['Sam','Amber','宇頡','Benben'], ts:1 });
+      ref.push({ desc:'🏠 Airbnb 住宿 4晚', amount:26718, currency:'TWD', day:'行前', payer:'Sam', split:['Sam','Amber','宇頡','Benben'], ts:2 });
+    }
+  });
+
+  // ── 工具 ──────────────────────────────────────────────────────
+  function toTWD(a, c) { return c === 'JPY' ? a * rate : a; }
+  function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function lUpdateBadge() {
+    const el = document.getElementById('lRateBadge');
+    if (el) el.textContent = '¥100 ≈ NT$' + (rate*100).toFixed(1);
+  }
+
+  window.lUpdateConv = function() {
+    const a = parseFloat(document.getElementById('lAmount')?.value) || 0;
+    const c = document.getElementById('lCurrency')?.value;
+    const el = document.getElementById('lConv');
+    if (!el) return;
+    el.textContent = a ? (c==='JPY' ? '≈ NT$ '+(a*rate).toFixed(0) : '≈ ¥ '+(a/rate).toFixed(0)+' JPY') : '';
+  };
+
+  window.lToggleChip = function(el) {
+    const sel = document.querySelectorAll('#lSplitChips .selected');
+    if (el.classList.contains('selected') && sel.length <= 1) return;
+    el.classList.toggle('selected');
+  };
+
+  window.lAddExpense = function() {
+    const desc   = document.getElementById('lDesc')?.value.trim();
+    const amount = parseFloat(document.getElementById('lAmount')?.value);
+    const currency = document.getElementById('lCurrency')?.value;
+    const day    = document.getElementById('lDay')?.value;
+    const payer  = document.getElementById('lPayer')?.value;
+    const split  = Array.from(document.querySelectorAll('#lSplitChips .selected')).map(e => e.dataset.p);
+    if (!desc)           { alert('請輸入費用說明'); return; }
+    if (!amount || amount<=0) { alert('請輸入金額'); return; }
+    if (!split.length)   { alert('請選擇分攤對象'); return; }
+    ref.push({ desc, amount, currency, day, payer, split, ts: firebase.database.ServerValue.TIMESTAMP });
+    document.getElementById('lDesc').value = '';
+    document.getElementById('lAmount').value = '';
+    document.getElementById('lConv').textContent = '';
+  };
+
+  window.lDeleteExpense = function(id) {
+    if (!confirm('確定刪除？')) return;
+    ref.child(id).remove();
+  };
+
+  window.lFetchRate = function() {
+    const btn = document.querySelector('.l-rate-btn');
+    btn.textContent = '⏳…';
+    fetch('https://api.exchangerate-api.com/v4/latest/JPY')
+      .then(r=>r.json()).then(d=>{
+        if (d.rates?.TWD) {
+          rate = parseFloat(d.rates.TWD.toFixed(4));
+          document.getElementById('lRateInput').value = rate;
+          localStorage.setItem('hk_rate', rate);
+          lUpdateBadge(); lUpdateConv(); lRender();
+          document.getElementById('lRateStatus').textContent = '已更新 '+new Date().toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'});
+        }
+        btn.textContent = '✅ 更新成功';
+      }).catch(()=>{ btn.textContent = '🔄 即時匯率'; });
+    setTimeout(()=>{ btn.textContent = '🔄 即時匯率'; }, 4000);
+  };
+
+  // ── 渲染 ──────────────────────────────────────────────────────
+  function lRender() { lRenderList(); lRenderSummary(); }
+
+  function lRenderList() {
+    const el = document.getElementById('lExpList');
+    if (!el) return;
+    if (!expenses.length) { el.innerHTML = '<div class="l-empty">🧾 尚無費用紀錄</div>'; return; }
+    const byDay = {};
+    [...expenses].reverse().forEach(e => { if(!byDay[e.day]) byDay[e.day]=[]; byDay[e.day].push(e); });
+    const ORDER = ['行前','8/18','8/19','8/20','8/21','8/22'];
+    const days = Object.keys(byDay).sort((a,b)=>ORDER.indexOf(b)-ORDER.indexOf(a));
+    let html = '';
+    days.forEach(day => {
+      html += '<div class="l-daylabel">'+esc(day)+'</div>';
+      byDay[day].forEach(e => {
+        const twd = toTWD(e.amount, e.currency);
+        const orig = e.currency==='JPY' ? '¥'+Number(e.amount).toLocaleString()+' JPY' : '';
+        const c = COLOR[e.payer]||'#718096';
+        html += `<div class="l-item">
+          <div class="l-item-body">
+            <div class="l-item-title">${esc(e.desc)}</div>
+            <div class="l-item-meta">${esc(e.day)}　${e.split.length===4?'4人均分':e.split.length+'人分攤'}</div>
+            <div class="l-item-chips">
+              <span class="l-ichip" style="background:${c}22;color:${c};font-weight:600">${EMOJI[e.payer]||''} ${esc(e.payer)} 付款</span>
+              ${e.split.map(p=>`<span class="l-ichip l-isplit">${EMOJI[p]||''}${esc(p)}</span>`).join('')}
+            </div>
+          </div>
+          <div class="l-item-right">
+            <div class="l-item-amt">NT$ ${Math.round(twd).toLocaleString()}</div>
+            ${orig?`<div class="l-item-orig">${orig}</div>`:''}
+            <button class="l-del" onclick="lDeleteExpense('${e.id}')">✕</button>
+          </div>
+        </div>`;
+      });
+    });
+    el.innerHTML = html;
+  }
+
+  function lRenderSummary() {
+    const paid={}, owed={};
+    PEOPLE.forEach(p=>{ paid[p]=0; owed[p]=0; });
+    expenses.forEach(e => {
+      const twd = toTWD(e.amount, e.currency);
+      const per = twd / e.split.length;
+      paid[e.payer] = (paid[e.payer]||0) + twd;
+      e.split.forEach(p => { owed[p] = (owed[p]||0) + per; });
+    });
+    const bal={};
+    PEOPLE.forEach(p=>{ bal[p]=(paid[p]||0)-(owed[p]||0); });
+    const total = expenses.reduce((s,e)=>s+toTWD(e.amount,e.currency),0);
+
+    const bl = document.getElementById('lBalList');
+    if (bl) {
+      bl.innerHTML = PEOPLE.map(p=>{
+        const b=bal[p], cls=b>0.5?'l-pos':b<-0.5?'l-neg':'l-zer';
+        const sign=b>0.5?'+ ':b<-0.5?'- ':'';
+        const lbl=b>0.5?'應收':b<-0.5?'應付':'結清 ✓';
+        return `<div class="l-pb">
+          <div class="l-pb-name"><div class="l-pb-dot ${DOTCLS[p]}"></div>${EMOJI[p]} ${esc(p)}</div>
+          <div class="l-pb-right">
+            <div class="l-pb-amt ${cls}">${sign}NT$ ${Math.abs(Math.round(b)).toLocaleString()} <span style="font-size:10px;font-weight:400">${lbl}</span></div>
+            <div class="l-pb-sub">付出 ${Math.round(paid[p]).toLocaleString()} · 分攤 ${Math.round(owed[p]).toLocaleString()}</div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    const tr = document.getElementById('lTotalRow');
+    if (tr) {
+      if (total>0) { tr.style.display='flex'; tr.innerHTML=`<span>總費用</span><strong>NT$ ${Math.round(total).toLocaleString()}</strong>`; }
+      else tr.style.display='none';
+    }
+
+    const settles = calcSettle(bal);
+    const sb = document.getElementById('lSettleBlock');
+    if (sb) {
+      if (!settles.length) { sb.innerHTML=''; return; }
+      sb.innerHTML = '<div class="l-settle"><h4>💸 結算方式</h4>'
+        + settles.map(s=>`<div class="l-si">${EMOJI[s.from]} ${esc(s.from)} <span style="color:#a0aec0">→</span> ${EMOJI[s.to]} ${esc(s.to)} <span class="l-si-amt">NT$ ${Math.round(s.amount).toLocaleString()}</span></div>`).join('')
+        + '</div>';
+    }
+  }
+
+  function calcSettle(bal) {
+    const d = PEOPLE.filter(p=>bal[p]<-0.5).map(p=>({n:p,a:-bal[p]})).sort((a,b)=>b.a-a.a);
+    const c = PEOPLE.filter(p=>bal[p]> 0.5).map(p=>({n:p,a: bal[p]})).sort((a,b)=>b.a-a.a);
+    const r=[]; let i=0,j=0;
+    while(i<d.length&&j<c.length){
+      const pay=Math.min(d[i].a,c[j].a);
+      if(pay>0.5) r.push({from:d[i].n,to:c[j].n,amount:pay});
+      d[i].a-=pay; c[j].a-=pay;
+      if(d[i].a<0.5)i++; if(c[j].a<0.5)j++;
+    }
+    return r;
+  }
+})();
 </script>
 </body>
 </html>
