@@ -1254,12 +1254,17 @@ function showPanel(name, el) {
     lRender();
   });
 
-  // 若 DB 空，自動填入行前兩筆
+  // 初始化：確保 4 筆行前記錄都存在（用 ts 識別，不重複寫入）
+  const SEED = [
+    { desc:'⚾ 棒球票（4人）',            amount:6126,  currency:'TWD', day:'行前', payer:'Sam',   split:['Sam','Amber','宇頡','Benben'], ts:1 },
+    { desc:'🏠 Airbnb 住宿 4晚',          amount:26718, currency:'TWD', day:'行前', payer:'Sam',   split:['Sam','Amber','宇頡','Benben'], ts:2 },
+    { desc:'Amber 行前還款',              amount:8212,  currency:'TWD', day:'行前', payer:'Amber', split:['Sam'],                         ts:3 },
+    { desc:'宇頡 行前還款（Amber 代付）', amount:8212,  currency:'TWD', day:'行前', payer:'宇頡',  split:['Sam'],                         ts:4 },
+  ];
   ref.once('value', snap => {
-    if (!snap.exists()) {
-      ref.push({ desc:'⚾ 棒球票（4人）',   amount:6126,  currency:'TWD', day:'行前', payer:'Sam', split:['Sam','Amber','宇頡','Benben'], ts:1 });
-      ref.push({ desc:'🏠 Airbnb 住宿 4晚', amount:26718, currency:'TWD', day:'行前', payer:'Sam', split:['Sam','Amber','宇頡','Benben'], ts:2 });
-    }
+    const existTs = new Set();
+    snap.forEach(c => existTs.add(c.val().ts));
+    SEED.forEach(r => { if (!existTs.has(r.ts)) ref.push(r); });
   });
 
   // ── 工具 ──────────────────────────────────────────────────────
