@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道分帳｜即時同步</title>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; color: #1a202c; min-height: 100vh; }
+
+  .header { background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%); color: white; padding: 18px 24px 14px; display: flex; justify-content: space-between; align-items: flex-start; }
+  .header-left h1 { font-size: 19px; font-weight: 700; letter-spacing: 0.5px; }
+  .header-left p { font-size: 12px; opacity: 0.75; margin-top: 2px; }
+  .sync-badge { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.15); border-radius: 20px; padding: 4px 10px; font-size: 12px; }
+  .sync-dot { width: 7px; height: 7px; border-radius: 50%; background: #68d391; }
+  .sync-dot.offline { background: #fc8181; }
+  .sync-dot.connecting { background: #fbd38d; animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .rate-bar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 9px 16px; display: flex; align-items: center; gap: 10px; font-size: 13px; flex-wrap: wrap; }
+  .rate-bar label { color: #718096; white-space: nowrap; }
+  .rate-input { border: 1px solid #cbd5e0; border-radius: 6px; padding: 4px 8px; font-size: 13px; width: 70px; text-align: right; }
+  .rate-badge { background: #ebf8ff; color: #2b6cb0; border-radius: 12px; padding: 3px 10px; font-size: 12px; font-weight: 600; }
+  .live-rate-btn { background: none; border: 1px solid #bee3f8; color: #2b6cb0; border-radius: 6px; padding: 3px 10px; font-size: 12px; cursor: pointer; }
+  .live-rate-btn:hover { background: #ebf8ff; }
+
+  .main { max-width: 780px; margin: 0 auto; padding: 14px; }
+
+  .add-card { background: white; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 16px; margin-bottom: 14px; }
+  .add-card h2 { font-size: 14px; font-weight: 700; color: #2d3748; margin-bottom: 12px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  .form-full { grid-column: 1 / -1; }
+  .field label { display: block; font-size: 11px; font-weight: 600; color: #718096; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .field input, .field select { width: 100%; border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 8px 10px; font-size: 14px; transition: border-color 0.15s; background: white; }
+  .field input:focus, .field select:focus { outline: none; border-color: #4299e1; }
+  .amount-row { display: flex; gap: 7px; }
+  .amount-row input { flex: 1; }
+  .amount-row select { width: 80px; flex-shrink: 0; }
+  .converted { font-size: 11px; color: #38a169; margin-top: 3px; font-weight: 500; min-height: 15px; }
+
+  .people-select { display: flex; gap: 6px; flex-wrap: wrap; }
+  .person-chip { padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e2e8f0; font-size: 13px; cursor: pointer; user-select: none; transition: all 0.15s; color: #4a5568; }
+  .chip-sam.selected { background: #3182ce; border-color: #3182ce; color: white; font-weight: 600; }
+  .chip-sam:not(.selected) { background: #ebf8ff; border-color: #bee3f8; color: #2b6cb0; }
+  .chip-amber.selected { background: #d53f8c; border-color: #d53f8c; color: white; font-weight: 600; }
+  .chip-amber:not(.selected) { background: #fff0f6; border-color: #fbb6ce; color: #b83280; }
+  .chip-yuqie.selected { background: #38a169; border-color: #38a169; color: white; font-weight: 600; }
+  .chip-yuqie:not(.selected) { background: #f0fff4; border-color: #9ae6b4; color: #276749; }
+  .chip-benben.selected { background: #ed8936; border-color: #ed8936; color: white; font-weight: 600; }
+  .chip-benben:not(.selected) { background: #fffaf0; border-color: #fbd38d; color: #c05621; }
+
+  .add-btn { width: 100%; padding: 11px; background: #2d6a9f; color: white; border: none; border-radius: 9px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 11px; transition: background 0.15s; }
+  .add-btn:hover { background: #1e3a5f; }
+  .add-btn:disabled { background: #a0aec0; cursor: not-allowed; }
+
+  .summary-card { background: white; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 16px; margin-bottom: 14px; }
+  .summary-card h2 { font-size: 14px; font-weight: 700; color: #2d3748; margin-bottom: 12px; }
+  .person-balance { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #f7fafc; }
+  .person-balance:last-child { border-bottom: none; }
+  .pb-name { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
+  .pb-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .dot-sam { background: #3182ce; } .dot-amber { background: #d53f8c; } .dot-yuqie { background: #38a169; } .dot-benben { background: #ed8936; }
+  .pb-amounts { text-align: right; }
+  .pb-twd { font-size: 15px; font-weight: 700; }
+  .pb-twd.positive { color: #276749; } .pb-twd.negative { color: #c53030; } .pb-twd.zero { color: #718096; }
+  .pb-sub { font-size: 11px; color: #a0aec0; margin-top: 1px; }
+  .settle-list { margin-top: 10px; background: #f7fafc; border-radius: 8px; padding: 11px; }
+  .settle-list h3 { font-size: 11px; font-weight: 700; color: #718096; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 7px; }
+  .settle-item { font-size: 13px; color: #4a5568; padding: 3px 0; display: flex; align-items: center; gap: 5px; }
+  .settle-arrow { color: #a0aec0; }
+  .settle-amount { font-weight: 700; color: #2d3748; margin-left: auto; }
+  .total-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0 0; border-top: 1px solid #e2e8f0; margin-top: 4px; font-size: 13px; color: #718096; }
+  .total-row strong { color: #2d3748; font-size: 15px; }
+
+  .expense-list h2 { font-size: 14px; font-weight: 700; color: #2d3748; margin-bottom: 10px; }
+  .expense-item { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); padding: 13px; margin-bottom: 7px; display: flex; gap: 10px; align-items: flex-start; }
+  .ei-body { flex: 1; min-width: 0; }
+  .ei-title { font-size: 14px; font-weight: 600; color: #2d3748; }
+  .ei-meta { font-size: 12px; color: #718096; margin-top: 2px; }
+  .ei-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+  .ei-chip { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+  .ei-split { background: #f7fafc; color: #718096; border: 1px solid #e2e8f0; }
+  .ei-right { text-align: right; flex-shrink: 0; }
+  .ei-amount { font-size: 15px; font-weight: 700; color: #2d3748; }
+  .ei-orig { font-size: 11px; color: #a0aec0; margin-top: 2px; }
+  .ei-del { background: none; border: none; color: #cbd5e0; cursor: pointer; font-size: 15px; padding: 2px 4px; margin-top: 4px; transition: color 0.15s; }
+  .ei-del:hover { color: #fc8181; }
+  .empty-state { text-align: center; padding: 36px 20px; color: #a0aec0; font-size: 14px; }
+  .day-label { font-size: 11px; font-weight: 700; color: #a0aec0; text-transform: uppercase; letter-spacing: 1px; padding: 6px 0 4px; }
+  .loading-overlay { text-align:center; padding: 40px; color: #a0aec0; font-size: 14px; }
+
+  @media (max-width: 500px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .form-full { grid-column: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>🗾 北海道分帳</h1>
+    <p>Sam・Amber・宇頡・Benben｜2026/8/18–8/22</p>
+  </div>
+  <div class="sync-badge">
+    <div class="sync-dot connecting" id="syncDot"></div>
+    <span id="syncText">連線中…</span>
+  </div>
+</div>
+
+<div class="rate-bar">
+  <label>¥1 JPY =</label>
+  <input type="number" class="rate-input" id="rateInput" value="0.215" step="0.001" min="0.1" max="1">
+  <label>TWD</label>
+  <span class="rate-badge" id="rateBadge">¥100 ≈ NT$21.5</span>
+  <button class="live-rate-btn" onclick="fetchRate()">🔄 更新匯率</button>
+  <span id="rateStatus" style="font-size:12px;color:#718096;"></span>
+</div>
+
+<div class="main">
+
+  <div class="add-card">
+    <h2>➕ 新增費用</h2>
+    <div class="form-grid">
+      <div class="field form-full">
+        <label>費用說明</label>
+        <input type="text" id="desc" placeholder="例：余市 Nikka 蒸溜所 入場券">
+      </div>
+      <div class="field">
+        <label>金額</label>
+        <div class="amount-row">
+          <input type="number" id="amount" placeholder="0" min="0" oninput="updateConverted()">
+          <select id="currency" onchange="updateConverted()">
+            <option value="TWD">NT$</option>
+            <option value="JPY">¥ JPY</option>
+          </select>
+        </div>
+        <div class="converted" id="converted"></div>
+      </div>
+      <div class="field">
+        <label>日期</label>
+        <select id="day">
+          <option value="8/18">8/18 一（Day 1）</option>
+          <option value="8/19">8/19 二（Day 2）</option>
+          <option value="8/20">8/20 三（Day 3）</option>
+          <option value="8/21" selected>8/21 四（Day 4）</option>
+          <option value="8/22">8/22 五（Day 5）</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>付款人</label>
+        <select id="payer">
+          <option value="Sam">Sam</option>
+          <option value="Amber">Amber</option>
+          <option value="宇頡">宇頡</option>
+          <option value="Benben">Benben</option>
+        </select>
+      </div>
+      <div class="field form-full">
+        <label>分攤對象</label>
+        <div class="people-select" id="splitPeople">
+          <div class="person-chip chip-sam selected" data-person="Sam" onclick="toggleSplit(this)">Sam</div>
+          <div class="person-chip chip-amber selected" data-person="Amber" onclick="toggleSplit(this)">Amber</div>
+          <div class="person-chip chip-yuqie selected" data-person="宇頡" onclick="toggleSplit(this)">宇頡</div>
+          <div class="person-chip chip-benben selected" data-person="Benben" onclick="toggleSplit(this)">Benben</div>
+        </div>
+      </div>
+    </div>
+    <button class="add-btn" id="addBtn" onclick="addExpense()">記帳</button>
+  </div>
+
+  <div class="summary-card">
+    <h2>💰 結算總覽</h2>
+    <div id="balanceList"><div class="loading-overlay">載入中…</div></div>
+    <div id="totalRow" class="total-row" style="display:none"></div>
+    <div id="settleBlock"></div>
+  </div>
+
+  <div class="expense-list">
+    <h2>📋 費用明細</h2>
+    <div id="expenseList"><div class="loading-overlay">載入中…</div></div>
+  </div>
+
+</div>
+
+<script>
+// ── Firebase 設定 ──────────────────────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyD98SaJk0rAB5f3OBHVvPJpi3O1hOmc3YI",
+  authDomain: "hokkaido-trip-cfc8e.firebaseapp.com",
+  databaseURL: "https://hokkaido-trip-cfc8e-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "hokkaido-trip-cfc8e",
+  storageBucket: "hokkaido-trip-cfc8e.firebasestorage.app",
+  messagingSenderId: "48495124695",
+  appId: "1:48495124695:web:3b9547834ab3f7cd835092"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const expensesRef = db.ref('expenses');
+
+// ── 連線狀態 ──────────────────────────────────────────────────
+const connectedRef = db.ref('.info/connected');
+connectedRef.on('value', snap => {
+  const online = snap.val();
+  const dot = document.getElementById('syncDot');
+  const txt = document.getElementById('syncText');
+  dot.className = 'sync-dot ' + (online ? '' : 'offline');
+  txt.textContent = online ? '即時同步中' : '離線';
+  document.getElementById('addBtn').disabled = !online;
+});
+
+// ── 常數 ──────────────────────────────────────────────────────
+const PEOPLE = ['Sam', 'Amber', '宇頡', 'Benben'];
+const CHIP_CLS = { Sam: 'chip-sam', Amber: 'chip-amber', '宇頡': 'chip-yuqie', Benben: 'chip-benben' };
+const DOT_CLS  = { Sam: 'dot-sam', Amber: 'dot-amber', '宇頡': 'dot-yuqie', Benben: 'dot-benben' };
+const EMOJI    = { Sam: '🧑‍💻', Amber: '🌸', '宇頡': '🍀', Benben: '🐾' };
+const COLOR    = { Sam: '#3182ce', Amber: '#d53f8c', '宇頡': '#38a169', Benben: '#ed8936' };
+
+let expenses = [];
+let rate = parseFloat(localStorage.getItem('hk_rate') || '0.215');
+
+document.getElementById('rateInput').value = rate;
+updateRateBadge();
+
+document.getElementById('rateInput').addEventListener('input', () => {
+  rate = parseFloat(document.getElementById('rateInput').value) || 0.215;
+  localStorage.setItem('hk_rate', rate);
+  updateRateBadge();
+  updateConverted();
+  render();
+});
+
+// ── Firebase 即時監聽 ──────────────────────────────────────────
+expensesRef.on('value', snapshot => {
+  expenses = [];
+  snapshot.forEach(child => {
+    expenses.push({ id: child.key, ...child.val() });
+  });
+  // sort by timestamp
+  expenses.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+  render();
+});
+
+// ── 工具函式 ───────────────────────────────────────────────────
+function toTWD(amount, currency) {
+  return currency === 'JPY' ? amount * rate : amount;
+}
+
+function updateRateBadge() {
+  document.getElementById('rateBadge').textContent = `¥100 ≈ NT$${(rate * 100).toFixed(1)}`;
+}
+
+function updateConverted() {
+  const amt = parseFloat(document.getElementById('amount').value) || 0;
+  const cur = document.getElementById('currency').value;
+  const el = document.getElementById('converted');
+  if (!amt) { el.textContent = ''; return; }
+  el.textContent = cur === 'JPY'
+    ? `≈ NT$ ${(amt * rate).toFixed(0)}`
+    : `≈ ¥ ${(amt / rate).toFixed(0)} JPY`;
+}
+
+function toggleSplit(el) {
+  const selected = document.querySelectorAll('#splitPeople .selected');
+  if (el.classList.contains('selected') && selected.length <= 1) return;
+  el.classList.toggle('selected');
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── 新增費用（寫入 Firebase）──────────────────────────────────
+function addExpense() {
+  const desc   = document.getElementById('desc').value.trim();
+  const amount = parseFloat(document.getElementById('amount').value);
+  const currency = document.getElementById('currency').value;
+  const day    = document.getElementById('day').value;
+  const payer  = document.getElementById('payer').value;
+  const split  = Array.from(document.querySelectorAll('#splitPeople .selected')).map(e => e.dataset.person);
+
+  if (!desc)             { alert('請輸入費用說明'); return; }
+  if (!amount || amount <= 0) { alert('請輸入金額'); return; }
+  if (!split.length)     { alert('請選擇分攤對象'); return; }
+
+  expensesRef.push({
+    desc, amount, currency, day, payer, split,
+    timestamp: firebase.database.ServerValue.TIMESTAMP
+  });
+
+  document.getElementById('desc').value = '';
+  document.getElementById('amount').value = '';
+  document.getElementById('converted').textContent = '';
+}
+
+// ── 刪除費用（從 Firebase 刪）────────────────────────────────
+function deleteExpense(id) {
+  if (!confirm('確定刪除這筆費用？')) return;
+  expensesRef.child(id).remove();
+}
+
+// ── 渲染 ──────────────────────────────────────────────────────
+function render() {
+  renderExpenses();
+  renderSummary();
+}
+
+function renderExpenses() {
+  const el = document.getElementById('expenseList');
+  if (!expenses.length) {
+    el.innerHTML = `<div class="empty-state">🧾<br>還沒有費用紀錄，新增第一筆吧！</div>`;
+    return;
+  }
+
+  const byDay = {};
+  [...expenses].reverse().forEach(e => {
+    if (!byDay[e.day]) byDay[e.day] = [];
+    byDay[e.day].push(e);
+  });
+
+  let html = '';
+  Object.keys(byDay).sort().reverse().forEach(day => {
+    html += `<div class="day-label">${day}</div>`;
+    byDay[day].forEach(e => {
+      const twd = toTWD(e.amount, e.currency);
+      const orig = e.currency === 'JPY' ? `¥${Number(e.amount).toLocaleString()} JPY` : '';
+      const c = COLOR[e.payer] || '#718096';
+      html += `
+        <div class="expense-item">
+          <div class="ei-body">
+            <div class="ei-title">${escHtml(e.desc)}</div>
+            <div class="ei-meta">${e.day}　${e.split.length === 4 ? '4人均分' : e.split.length + '人分攤'}</div>
+            <div class="ei-chips">
+              <span class="ei-chip" style="background:${c}22;color:${c};font-weight:600">${EMOJI[e.payer]} ${e.payer} 付款</span>
+              ${e.split.map(p => `<span class="ei-chip ei-split">${EMOJI[p]}${p}</span>`).join('')}
+            </div>
+          </div>
+          <div class="ei-right">
+            <div class="ei-amount">NT$ ${Math.round(twd).toLocaleString()}</div>
+            ${orig ? `<div class="ei-orig">${orig}</div>` : ''}
+            <button class="ei-del" onclick="deleteExpense('${e.id}')">✕</button>
+          </div>
+        </div>`;
+    });
+  });
+  el.innerHTML = html;
+}
+
+function renderSummary() {
+  const paid = {}, owed = {};
+  PEOPLE.forEach(p => { paid[p] = 0; owed[p] = 0; });
+
+  expenses.forEach(e => {
+    const twd = toTWD(e.amount, e.currency);
+    const per = twd / e.split.length;
+    paid[e.payer] = (paid[e.payer] || 0) + twd;
+    e.split.forEach(p => { owed[p] = (owed[p] || 0) + per; });
+  });
+
+  const balance = {};
+  PEOPLE.forEach(p => { balance[p] = (paid[p] || 0) - (owed[p] || 0); });
+
+  const total = expenses.reduce((s, e) => s + toTWD(e.amount, e.currency), 0);
+
+  let html = '';
+  PEOPLE.forEach(p => {
+    const b = balance[p];
+    const cls = b > 0.5 ? 'positive' : b < -0.5 ? 'negative' : 'zero';
+    const sign = b > 0.5 ? '+ ' : b < -0.5 ? '- ' : '';
+    const label = b > 0.5 ? '應收' : b < -0.5 ? '應付' : '結清 ✓';
+    html += `
+      <div class="person-balance">
+        <div class="pb-name">
+          <div class="pb-dot ${DOT_CLS[p]}"></div>
+          ${EMOJI[p]} ${p}
+        </div>
+        <div class="pb-amounts">
+          <div class="pb-twd ${cls}">${sign}NT$ ${Math.abs(Math.round(b)).toLocaleString()} <span style="font-size:11px;font-weight:400">${label}</span></div>
+          <div class="pb-sub">付出 ${Math.round(paid[p]).toLocaleString()} · 分攤 ${Math.round(owed[p]).toLocaleString()}</div>
+        </div>
+      </div>`;
+  });
+  document.getElementById('balanceList').innerHTML = html;
+
+  const totalEl = document.getElementById('totalRow');
+  if (total > 0) {
+    totalEl.style.display = 'flex';
+    totalEl.innerHTML = `<span>總費用</span><strong>NT$ ${Math.round(total).toLocaleString()}</strong>`;
+  } else {
+    totalEl.style.display = 'none';
+  }
+
+  const settles = calcSettle(balance);
+  const settleEl = document.getElementById('settleBlock');
+  if (!settles.length) { settleEl.innerHTML = ''; return; }
+  let sh = `<div class="settle-list"><h3>💸 結算方式</h3>`;
+  settles.forEach(s => {
+    sh += `<div class="settle-item">${EMOJI[s.from]} ${s.from} <span class="settle-arrow">→</span> ${EMOJI[s.to]} ${s.to} <span class="settle-amount">NT$ ${Math.round(s.amount).toLocaleString()}</span></div>`;
+  });
+  settleEl.innerHTML = sh + '</div>';
+}
+
+function calcSettle(balance) {
+  const debtors   = PEOPLE.filter(p => balance[p] < -0.5).map(p => ({ name: p, amt: -balance[p] })).sort((a,b) => b.amt - a.amt);
+  const creditors = PEOPLE.filter(p => balance[p] >  0.5).map(p => ({ name: p, amt:  balance[p] })).sort((a,b) => b.amt - a.amt);
+  const result = [];
+  let i = 0, j = 0;
+  while (i < debtors.length && j < creditors.length) {
+    const pay = Math.min(debtors[i].amt, creditors[j].amt);
+    if (pay > 0.5) result.push({ from: debtors[i].name, to: creditors[j].name, amount: pay });
+    debtors[i].amt -= pay; creditors[j].amt -= pay;
+    if (debtors[i].amt < 0.5) i++;
+    if (creditors[j].amt < 0.5) j++;
+  }
+  return result;
+}
+
+// ── 即時匯率 ──────────────────────────────────────────────────
+function fetchRate() {
+  const btn = document.querySelector('.live-rate-btn');
+  btn.textContent = '⏳ 查詢中…';
+  fetch('https://api.exchangerate-api.com/v4/latest/JPY')
+    .then(r => r.json())
+    .then(d => {
+      if (d.rates?.TWD) {
+        rate = parseFloat(d.rates.TWD.toFixed(4));
+        document.getElementById('rateInput').value = rate;
+        localStorage.setItem('hk_rate', rate);
+        updateRateBadge(); updateConverted(); render();
+        document.getElementById('rateStatus').textContent = `已更新 ${new Date().toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'})}`;
+        btn.textContent = '✅ 更新成功';
+      } else throw new Error();
+    })
+    .catch(() => {
+      document.getElementById('rateStatus').textContent = '⚠️ 無法取得，請手動輸入';
+      btn.textContent = '🔄 更新匯率';
+    });
+  setTimeout(() => { btn.textContent = '🔄 更新匯率'; }, 5000);
+}
+</script>
+</body>
+</html>
