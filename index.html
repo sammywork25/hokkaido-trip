@@ -1249,7 +1249,12 @@ function showPanel(name, el) {
   // 即時監聽
   ref.on('value', snap => {
     expenses = [];
-    snap.forEach(c => expenses.push({ id: c.key, ...c.val() }));
+    snap.forEach(c => {
+      const val = c.val();
+      // Firebase 把陣列轉成 {0:...,1:...}，讀回時還原
+      if (val.split && !Array.isArray(val.split)) val.split = Object.values(val.split);
+      expenses.push({ id: c.key, ...val });
+    });
     expenses.sort((a,b) => (a.ts||0)-(b.ts||0));
     lRender();
   });
