@@ -1261,17 +1261,17 @@ function showPanel(name, el) {
 
   // 版本控制：v2 = 清除所有重複，重新播種正確 4 筆
   const SEED = [
-    { desc:'⚾ 棒球票（4人）',            amount:6126,  currency:'TWD', day:'行前', payer:'Sam',   split:['Sam','Amber','宇頡','Benben'], ts:1 },
+    { desc:'⚾ 棒球票（4人）',            amount:6130,  currency:'TWD', day:'行前', payer:'Sam',   split:['Sam','Amber','宇頡','Benben'], ts:1 },
     { desc:'🏠 Airbnb 住宿 4晚',          amount:26718, currency:'TWD', day:'行前', payer:'Sam',   split:['Sam','Amber','宇頡','Benben'], ts:2 },
     { desc:'Amber 行前還款',              amount:8212,  currency:'TWD', day:'行前', payer:'Amber', split:['Sam'],                         ts:3 },
     { desc:'宇頡 行前還款（Amber 代付）', amount:8212,  currency:'TWD', day:'行前', payer:'宇頡',  split:['Sam'],                         ts:4 },
   ];
   db.ref('_v').once('value', snap => {
-    if (snap.val() !== 2) {
+    if (snap.val() !== 3) {
       // 清空重播
       ref.remove().then(() => {
         SEED.forEach(r => ref.push(r));
-        db.ref('_v').set(2);
+        db.ref('_v').set(3);
       });
     }
   });
